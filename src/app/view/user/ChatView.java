@@ -10,6 +10,7 @@ import app.model.User;
 import app.view.main.MainView;
 import app.view.user.ui.ChatUI;
 
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -17,14 +18,14 @@ public class ChatView {
     private final UserController userController = new UserController();
     private final ChatController chatController = new ChatController();
     private User loginUser = userController.getLoginUser();
-    private List<Chat> chatValue = chatController.findAllChatByUser(loginUser);
-    private ChatDetail chatDetail = new ChatDetail(1, "", loginUser);
+    private List<Chat> chatList = chatController.findAllChatByUser(loginUser);
+    private ChatDetail chatSession = new ChatDetail(1, "", loginUser);
     private List<User> searchUserResult = new LinkedList<>();
     private String findName = "", chatContent = "";
 
     /*========================================View Chat Page Start========================================*/
     public void viewChatPage() {
-        ChatUI.showMenuChatList();
+        ChatUI.showMenuChatList(chatList);
         System.out.print(MenuConst.SELECT_OPTION);
         int option = InputConfig.getInteger();
         switch (option) {
@@ -32,7 +33,7 @@ public class ChatView {
                 manageNewChat();
                 break;
             case 2:
-                showCurrentChatList();
+                showCurrentChatList(option);
                 break;
             case 9:
                 resetTempValue();
@@ -44,7 +45,7 @@ public class ChatView {
             case 0:
                 MainView.exitApplication();
             default:
-                ChatUI.showMenuChatList();
+                ChatUI.showMenuChatList(chatList);
                 MainView.showInvalidOption();
                 InputConfig.pressAnyKey();
                 viewChatPage();
@@ -116,20 +117,30 @@ public class ChatView {
 
     private void sentChatDetail(Chat startChat) {
         int option = 0;
-        ChatUI.showMenuChatDetail(option, startChat, chatDetail, loginUser);
+        ChatUI.showMenuChatDetail(option, startChat, chatSession, loginUser);
         System.out.print(MenuConst.SELECT_OPTION);
         option = InputConfig.getInteger();
         switch (option) {
+            case 7:
+                if (checkAbilityDeleteChat(startChat, loginUser) == 0) {
+                    ChatUI.showMenuChatList(chatList);
+                    MainView.showInvalidOption();
+                    InputConfig.pressAnyKey();
+                    sentChatDetail(startChat);
+                } else {
+                    deleteChat(option, startChat);
+                }
+                break;
             case 8:
-                if (chatDetail.getContent().length() == 0) {
+                if (chatSession.getContent().length() == 0) {
                     writeNewChat(option, startChat);
                 } else {
-                    sentChat(option, startChat);
+                    sentChat(option, startChat, loginUser);
                 }
                 break;
             case 9:
                 resetTempValue();
-                manageNewChat();
+                viewChatPage();
                 break;
             case 10:
                 new MainView().logout();
@@ -137,35 +148,107 @@ public class ChatView {
             case 0:
                 MainView.exitApplication();
             default:
-                ChatUI.showMenuChatList();
+                ChatUI.showMenuChatList(chatList);
                 MainView.showInvalidOption();
                 InputConfig.pressAnyKey();
                 sentChatDetail(startChat);
         }
     }
 
-    private void sentChat(int option, Chat startChat) {
+    private void deleteChat(int option, Chat startChat) {
+        ChatUI.showMenuChatDetail(option, startChat, chatSession, loginUser);
+        System.out.print(MenuConst.CONFIRM_DELETE_CHAT);
+        String confirm = InputConfig.getString();
+        if (confirm.equalsIgnoreCase("y")) {
+            //Delete Chat in here
+            ChatUI.showMenuChatDetail(option, startChat, chatSession, loginUser);
+            if (startChat.getStartUser().getUserId() == loginUser.getUserId()) {
+                startChat.setStartIn(null);
+            } else {
+                startChat.setTargetIn(null);
+            }
+            chatController.removeChatByChatUser(startChat);
+            resetTempValue();
+            System.out.print(MenuConst.DELETE_CHAT_SUCCESS);
+            InputConfig.pressAnyKey();
+            viewChatPage();
+        } else {
+            sentChatDetail(startChat);
+        }
+    }
+
+    private void sentChat(int option, Chat startChat, User loginUser) {
         List<ChatDetail> chatDetailList = startChat.getChatContent();
-        chatDetailList.add(chatDetail);
+        if (startChat.getStartUser().getUserId() == loginUser.getUserId() &&
+                startChat.getTargetIn() == null) {
+            startChat.setTargetIn(new Date());
+        } else if (startChat.getTargetUser().getUserId() == loginUser.getUserId() &&
+                startChat.getStartIn() == null) {
+            startChat.setStartIn(new Date());
+        }
+        chatDetailList.add(chatSession);
         chatController.sentNewChat(startChat);
         resetTempValue();
-        ChatUI.showMenuChatDetail(option, startChat, chatDetail, loginUser);
+        ChatUI.showMenuChatDetail(option, startChat, chatSession, loginUser);
         System.out.print(MenuConst.SENT_CHAT_SUCCESS);
         InputConfig.pressAnyKey();
         sentChatDetail(startChat);
     }
 
     private void writeNewChat(int option, Chat startChat) {
-        ChatUI.showMenuChatDetail(option, startChat, chatDetail, loginUser);
+        ChatUI.showMenuChatDetail(option, startChat, chatSession, loginUser);
         System.out.print(MenuConst.INPUT_CHAT);
         chatContent = InputConfig.getString();
         int chatDetailId = chatController.generateChatDetailId(startChat);
-        chatDetail = new ChatDetail(chatDetailId, chatContent, loginUser);
+        chatSession = new ChatDetail(chatDetailId, chatContent, loginUser);
         sentChatDetail(startChat);
     }
 
-    private void showCurrentChatList() {
+    private void showCurrentChatList(int option) {
+        ChatUI.showMenuCurrentChatList(option, chatList, loginUser);
+        System.out.print(MenuConst.SELECT_OPTION);
+        int action = InputConfig.getInteger();
+        switch (action) {
+            case 8:
+                if (chatList.size() != 0) {
+                    directToChatDetail(action);
+                } else {
+                    ChatUI.showMenuCurrentChatList(action, chatList, loginUser);
+                    MainView.showInvalidOption();
+                    InputConfig.pressAnyKey();
+                    showCurrentChatList(option);
+                }
+                break;
+            case 9:
+                resetTempValue();
+                viewChatPage();
+                break;
+            case 10:
+                new MainView().logout();
+                break;
+            case 0:
+                MainView.exitApplication();
+            default:
+                ChatUI.showMenuCurrentChatList(action, chatList, loginUser);
+                MainView.showInvalidOption();
+                InputConfig.pressAnyKey();
+                showCurrentChatList(option);
+        }
+    }
 
+    private void directToChatDetail(int option) {
+        ChatUI.showMenuCurrentChatList(option, chatList, loginUser);
+        System.out.print(MenuConst.INPUT_CHAT_ID);
+        int id = InputConfig.getInteger();
+        Chat chatDetail = chatController.findChatDetailByIDAndUser(id, loginUser);
+        if (chatDetail == null) {
+            ChatUI.showMenuCurrentChatList(option, chatList, loginUser);
+            System.out.print(MenuConst.RESULT_NOT_FOUND);
+            InputConfig.pressAnyKey();
+            showCurrentChatList(option);
+        } else {
+            sentChatDetail(chatDetail);
+        }
     }
 
     private User selectUserToStartChat(int id) {
@@ -177,11 +260,28 @@ public class ChatView {
         return null;
     }
 
+    private int checkAbilityDeleteChat(Chat startChat, User loginUser) {
+        int count = 0;
+        long timeIn;
+        if (startChat.getStartUser().getUserId() == loginUser.getUserId()) {
+            timeIn = startChat.getStartIn().getTime();
+        } else {
+            timeIn = startChat.getTargetIn().getTime();
+        }
+        for (ChatDetail chatDetail : startChat.getChatContent()) {
+            long sentTime = chatDetail.getSentTime().getTime();
+            if (sentTime - timeIn >= 0) {
+                count++;
+            }
+        }
+        return count;
+    }
+
     /*========================================View Chat Page End========================================*/
     private void resetTempValue() {
-        chatValue = chatController.findAllChatByUser(loginUser);
+        chatList = chatController.findAllChatByUser(loginUser);
         loginUser = userController.getLoginUser();
-        chatDetail = new ChatDetail(1, "", loginUser);
+        chatSession = new ChatDetail(1, "", loginUser);
         searchUserResult = new LinkedList<>();
         findName = chatContent = "";
     }

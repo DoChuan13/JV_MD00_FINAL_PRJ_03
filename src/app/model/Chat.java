@@ -9,8 +9,8 @@ public class Chat implements Serializable {
     private int chatId;
     private User startUser;
     private User targetUser;
-    private Date startUserIn;
-    private Date targetUserIn;
+    private Date startIn = new Date();
+    private Date targetIn = new Date();
     private Date startTime = new Date();
     private Date latestTime = new Date();
     private List<ChatDetail> chatContent = new LinkedList<>();
@@ -31,20 +31,28 @@ public class Chat implements Serializable {
         this.chatContent = chatContent;
     }
 
-    public Date isUser1Out() {
-        return startUserIn;
+    public Date getStartIn() {
+        return startIn;
     }
 
-    public void setStartUserIn(Date startUserIn) {
-        this.startUserIn = startUserIn;
+    public void setStartIn(Date startIn) {
+        this.startIn = startIn;
+    }
+
+    public Date getTargetIn() {
+        return targetIn;
+    }
+
+    public void setTargetIn(Date targetIn) {
+        this.targetIn = targetIn;
+    }
+
+    public Date isUser1Out() {
+        return startIn;
     }
 
     public Date isUser2Out() {
-        return targetUserIn;
-    }
-
-    public void setTargetUserIn(Date targetUserIn) {
-        this.targetUserIn = targetUserIn;
+        return targetIn;
     }
 
     public Date getLatestTime() {
@@ -97,8 +105,8 @@ public class Chat implements Serializable {
                 "chatId=" + chatId +
                 ", user1=" + startUser +
                 ", user2=" + targetUser +
-                ", User1Out=" + startUserIn +
-                ", User2Out=" + targetUserIn +
+                ", User1Out=" + startIn +
+                ", User2Out=" + targetIn +
                 ", startTime=" + startTime +
                 ", latestTime=" + latestTime +
                 ", chatContent=" + chatContent +

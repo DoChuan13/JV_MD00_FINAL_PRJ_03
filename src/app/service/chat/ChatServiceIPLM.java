@@ -7,6 +7,7 @@ import app.model.User;
 import app.service.generic.IDataBaseService;
 import init.DataBase;
 
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -77,8 +78,10 @@ public class ChatServiceIPLM implements IChatService, IDataBaseService<Chat> {
         List<Chat> chatResult = new LinkedList<>();
         for (Chat chat : chatList) {
             User user1 = chat.getStartUser();
+            Date timeIn1 = chat.getStartIn();
             User user2 = chat.getTargetUser();
-            if (user1.getUserId() == loginUser.getUserId() || user2.getUserId() == loginUser.getUserId()) {
+            Date timeIn2 = chat.getTargetIn();
+            if ((user1.getUserId() == loginUser.getUserId() && timeIn1 != null) || (user2.getUserId() == loginUser.getUserId() && timeIn2 != null)) {
                 chatResult.add(chat);
             }
         }

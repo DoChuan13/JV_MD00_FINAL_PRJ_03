@@ -15,14 +15,14 @@ public class HomeUI {
         System.out.println(MenuConst.HEADER_HOME);
         //Show all post here
         if (postList.size() == 0) {
-            System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.INACTIVE_COLOR + "  => " + MenuConst.WIDTH_2_COL + ColorConfig.RESET + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "You have no any Post for you in Home Page");
+            System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.INACTIVE_COLOR + "  => " + MenuConst.WIDTH_1_COL + ColorConfig.RESET + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "You have no any Post for you in Home Page");
         } else {
             for (Post post : postList) {
                 showAllPost(post);
             }
         }
         System.out.println(MenuConst.BREAK_LINE);
-        System.out.printf(ColorConfig.BORDER_COLOR + "|" + (option == 8 ? ColorConfig.ACTIVE_COLOR : ColorConfig.ACTION_COLOR) + "  8. " + MenuConst.WIDTH_2_COL + ColorConfig.RESET + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "View Post");
+        System.out.printf(ColorConfig.BORDER_COLOR + "|" + (option == 8 ? ColorConfig.ACTIVE_COLOR : ColorConfig.ACTION_COLOR) + "  8. " + MenuConst.WIDTH_1_COL + ColorConfig.RESET + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "View Post");
         System.out.println(MenuConst.BREAK_LINE);
         System.out.println(MenuConst.SYS_CTR_FUL_123);
         System.out.println(MenuConst.FOOTER);

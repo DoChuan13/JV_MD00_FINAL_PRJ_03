@@ -17,8 +17,8 @@ public final class AdminUI {
         if (currentRole == RoleName.ADMIN) System.out.println(MenuConst.HEADER_ADMIN);
         else System.out.println(MenuConst.HEADER_PM);
 
-        System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  1. " + MenuConst.WIDTH_2_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, (currentRole == RoleName.ADMIN) ? "Admin Profile" : "PM Profile");
-        System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  2. " + MenuConst.WIDTH_2_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "User Management");
+        System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  1. " + MenuConst.WIDTH_1_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, (currentRole == RoleName.ADMIN) ? "Admin Profile" : "PM Profile");
+        System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  2. " + MenuConst.WIDTH_1_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "User Management");
 
         System.out.println(MenuConst.BREAK_LINE);
         System.out.println(MenuConst.SYS_CTR_MID_13);
@@ -34,7 +34,7 @@ public final class AdminUI {
         showUserInfo(loginUser);
 
         System.out.println(MenuConst.BREAK_LINE);
-        System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.ACTION_COLOR + "  8. " + MenuConst.WIDTH_2_COL + ColorConfig.RESET + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "Change Password");
+        System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.ACTION_COLOR + "  8. " + MenuConst.WIDTH_1_COL + ColorConfig.RESET + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "Change Password");
         System.out.println(MenuConst.BREAK_LINE);
         System.out.println(MenuConst.SYS_CTR_FUL_123);
         System.out.println(MenuConst.FOOTER);
@@ -57,12 +57,12 @@ public final class AdminUI {
         String role = "Role";
         BreakConfig.clearScreen();
         System.out.println(MenuConst.HEADER_ADMIN_ACC_LIST);
-        System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + " " + MenuConst.WIDTH_ACC_LIST + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, userId, userName, name, status, role);
+        System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + " " + MenuConst.WIDTH_5_COL_ACC_LIST + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, userId, userName, name, status, role);
         for (User user : userList) {
             showUserDetailInfo(user);
         }
         System.out.println(MenuConst.BREAK_LINE);
-        System.out.printf(ColorConfig.BORDER_COLOR + "|" + (option == 8 ? ColorConfig.ACTIVE_COLOR : ColorConfig.ACTION_COLOR) + "  8. " + MenuConst.WIDTH_2_COL + ColorConfig.RESET + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "See Detail");
+        System.out.printf(ColorConfig.BORDER_COLOR + "|" + (option == 8 ? ColorConfig.ACTIVE_COLOR : ColorConfig.ACTION_COLOR) + "  8. " + MenuConst.WIDTH_1_COL + ColorConfig.RESET + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "See Detail");
         System.out.println(MenuConst.BREAK_LINE);
         System.out.println(MenuConst.SYS_CTR_FUL_123);
         System.out.println(MenuConst.FOOTER);
@@ -75,9 +75,9 @@ public final class AdminUI {
         RoleName roleNameUser = new ArrayList<>(user.getRole()).get(0).getName();
         RoleName roleNameLogin = new ArrayList<>(loginUser.getRole()).get(0).getName();
 
-        String actionBlockUser = ColorConfig.BORDER_COLOR + "|" + (option == 6 ? ColorConfig.ACTIVE_COLOR : ColorConfig.ACTION_COLOR) + "  6. " + MenuConst.WIDTH_2_COL + ColorConfig.RESET + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET;
-        String actionDeleteUser = ColorConfig.BORDER_COLOR + "|" + (option == 7 ? ColorConfig.ACTIVE_COLOR : ColorConfig.ACTION_COLOR) + "  7. " + MenuConst.WIDTH_2_COL + ColorConfig.RESET + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET;
-        String actionChangeRole = ColorConfig.BORDER_COLOR + "|" + (option == 8 ? ColorConfig.ACTIVE_COLOR : ColorConfig.ACTION_COLOR) + "  8. " + MenuConst.WIDTH_2_COL + ColorConfig.RESET + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET;
+        String actionBlockUser = ColorConfig.BORDER_COLOR + "|" + (option == 6 ? ColorConfig.ACTIVE_COLOR : ColorConfig.ACTION_COLOR) + "  6. " + MenuConst.WIDTH_1_COL + ColorConfig.RESET + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET;
+        String actionDeleteUser = ColorConfig.BORDER_COLOR + "|" + (option == 7 ? ColorConfig.ACTIVE_COLOR : ColorConfig.ACTION_COLOR) + "  7. " + MenuConst.WIDTH_1_COL + ColorConfig.RESET + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET;
+        String actionChangeRole = ColorConfig.BORDER_COLOR + "|" + (option == 8 ? ColorConfig.ACTIVE_COLOR : ColorConfig.ACTION_COLOR) + "  8. " + MenuConst.WIDTH_1_COL + ColorConfig.RESET + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET;
         if (roleNameLogin == RoleName.ADMIN) {
             if (roleNameUser != RoleName.ADMIN) {
                 System.out.println(MenuConst.BREAK_LINE);
@@ -104,16 +104,16 @@ public final class AdminUI {
         String name = user.getName();
         String status = (!user.isStatus()) ? "Active" : "Blocked";
         String roleName = String.valueOf(new ArrayList<>(user.getRole()).get(0).getName());
-        System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + " " + MenuConst.WIDTH_ACC_LIST + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, userId, userName, name, status, roleName);
+        System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + " " + MenuConst.WIDTH_5_COL_ACC_LIST + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, userId, userName, name, status, roleName);
         System.out.println(MenuConst.BLANK_LINE);
     }
 
     private static void showUserInfo(User user) {
-        System.out.printf(ColorConfig.BORDER_COLOR + "|" + "  *. " + MenuConst.WITH_ONE_CONTENT + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "UserName: ", user.getUserName());
-        System.out.printf(ColorConfig.BORDER_COLOR + "|" + "  *. " + MenuConst.WITH_ONE_CONTENT + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "Name: ", user.getName());
-        System.out.printf(ColorConfig.BORDER_COLOR + "|" + "  *. " + MenuConst.WITH_ONE_CONTENT + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "Name: ", (user.isGender() == null ? "Unknown" : user.isGender() ? "Male" : "Female"));
-        System.out.printf(ColorConfig.BORDER_COLOR + "|" + "  *. " + MenuConst.WITH_ONE_CONTENT + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "Email: ", user.getEmail());
-        System.out.printf(ColorConfig.BORDER_COLOR + "|" + "  *. " + MenuConst.WITH_ONE_CONTENT + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "Status: ", (!user.isStatus() ? "Active" : "Blocked"));
-        System.out.printf(ColorConfig.BORDER_COLOR + "|" + "  *. " + MenuConst.WITH_ONE_CONTENT + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "Role: ", (new ArrayList<>(user.getRole()).get(0).getName()));
+        System.out.printf(ColorConfig.BORDER_COLOR + "|" + "  *. " + MenuConst.WIDTH_2_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "UserName: ", user.getUserName());
+        System.out.printf(ColorConfig.BORDER_COLOR + "|" + "  *. " + MenuConst.WIDTH_2_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "Name: ", user.getName());
+        System.out.printf(ColorConfig.BORDER_COLOR + "|" + "  *. " + MenuConst.WIDTH_2_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "Name: ", (user.isGender() == null ? "Unknown" : user.isGender() ? "Male" : "Female"));
+        System.out.printf(ColorConfig.BORDER_COLOR + "|" + "  *. " + MenuConst.WIDTH_2_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "Email: ", user.getEmail());
+        System.out.printf(ColorConfig.BORDER_COLOR + "|" + "  *. " + MenuConst.WIDTH_2_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "Status: ", (!user.isStatus() ? "Active" : "Blocked"));
+        System.out.printf(ColorConfig.BORDER_COLOR + "|" + "  *. " + MenuConst.WIDTH_2_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "Role: ", (new ArrayList<>(user.getRole()).get(0).getName()));
     }
 }

@@ -16,10 +16,10 @@ public final class FriendUI {
         BreakConfig.clearScreen();
         System.out.println(MenuConst.HEADER_FRIEND);
 
-        System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  1. " + MenuConst.WIDTH_2_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "View All Friend");
-        System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  2. " + MenuConst.WIDTH_2_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "Add New Friend");
-        System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  3. " + MenuConst.WIDTH_2_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "Friend Request List " + "(" + pending + ")");
-        System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  4. " + MenuConst.WIDTH_2_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "Sent Request List " + "(" + sent + ")");
+        System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  1. " + MenuConst.WIDTH_1_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "View All Friend");
+        System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  2. " + MenuConst.WIDTH_1_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "Add New Friend");
+        System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  3. " + MenuConst.WIDTH_1_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "Friend Request List " + "(" + pending + ")");
+        System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  4. " + MenuConst.WIDTH_1_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "Sent Request List " + "(" + sent + ")");
 
         System.out.println(MenuConst.BREAK_LINE);
         System.out.println(MenuConst.SYS_CTR_FUL_123);
@@ -33,7 +33,7 @@ public final class FriendUI {
         showAllFriend(acceptedFriends, currentUser);
 
         System.out.println(MenuConst.BREAK_LINE);
-        System.out.printf(ColorConfig.BORDER_COLOR + "|" + (option == 8 ? ColorConfig.ACTIVE_COLOR : ColorConfig.ACTION_COLOR) + "  8. " + MenuConst.WIDTH_2_COL + ColorConfig.RESET + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "View Friend Detail");
+        System.out.printf(ColorConfig.BORDER_COLOR + "|" + (option == 8 ? ColorConfig.ACTIVE_COLOR : ColorConfig.ACTION_COLOR) + "  8. " + MenuConst.WIDTH_1_COL + ColorConfig.RESET + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "View Friend Detail");
 
         System.out.println(MenuConst.BREAK_LINE);
         System.out.println(MenuConst.SYS_CTR_FUL_123);
@@ -42,7 +42,7 @@ public final class FriendUI {
 
     private static void showAllFriend(List<Friend> acceptedFriends, User currentUser) {
         if (acceptedFriends.size() == 0) {
-            System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  => " + MenuConst.WIDTH_2_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "You have no any Friend");
+            System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  => " + MenuConst.WIDTH_1_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "You have no any Friend");
         } else {
             String friendName;
             for (Friend friend : acceptedFriends) {
@@ -50,12 +50,12 @@ public final class FriendUI {
                     friendName = friend.getFriend2().getName();
                     String friendId = "Friend Id: " + friend.getFriendId();
                     String friendNameView = "Name: " + friendName;
-                    System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  => " + MenuConst.WITH_ONE_CONTENT + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, friendId, friendNameView);
+                    System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  => " + MenuConst.WIDTH_2_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, friendId, friendNameView);
                 } else {
                     friendName = friend.getFriend1().getName();
                     String friendId = "Friend Id: " + friend.getFriendId();
                     String friendNameView = "Name: " + friendName;
-                    System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  => " + MenuConst.WITH_ONE_CONTENT + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, friendId, friendNameView);
+                    System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  => " + MenuConst.WIDTH_2_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, friendId, friendNameView);
                 }
             }
         }
@@ -67,12 +67,12 @@ public final class FriendUI {
         BreakConfig.clearScreen();
         System.out.println(MenuConst.HEADER_PROFILE_INFO);
 
-        System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.INACTIVE_COLOR + "  *. " + MenuConst.WITH_ONE_CONTENT + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "Name: ", friendUser.getName());
-        System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.INACTIVE_COLOR + "  *. " + MenuConst.WITH_ONE_CONTENT + ColorConfig.RESET + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "Sex: ", (friendUser.isGender() == null ? "Unknown" : friendUser.isGender() ? "Male" : "Female"));
-        System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.INACTIVE_COLOR + "  *. " + MenuConst.WITH_ONE_CONTENT + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "Email: ", friendUser.getEmail());
+        System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.INACTIVE_COLOR + "  *. " + MenuConst.WIDTH_2_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "Name: ", friendUser.getName());
+        System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.INACTIVE_COLOR + "  *. " + MenuConst.WIDTH_2_COL + ColorConfig.RESET + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "Sex: ", (friendUser.isGender() == null ? "Unknown" : friendUser.isGender() ? "Male" : "Female"));
+        System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.INACTIVE_COLOR + "  *. " + MenuConst.WIDTH_2_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "Email: ", friendUser.getEmail());
 
         System.out.println(MenuConst.BREAK_LINE);
-        System.out.printf(ColorConfig.BORDER_COLOR + "|" + (option == 8 ? ColorConfig.ACTIVE_COLOR : ColorConfig.ACTION_COLOR) + "  8. " + MenuConst.WIDTH_2_COL + ColorConfig.RESET + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "Un Friend");
+        System.out.printf(ColorConfig.BORDER_COLOR + "|" + (option == 8 ? ColorConfig.ACTIVE_COLOR : ColorConfig.ACTION_COLOR) + "  8. " + MenuConst.WIDTH_1_COL + ColorConfig.RESET + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "Un Friend");
 
         System.out.println(MenuConst.BREAK_LINE);
         System.out.println(MenuConst.SYS_CTR_FUL_123);
@@ -108,7 +108,7 @@ public final class FriendUI {
             }
         }
         System.out.println(MenuConst.BREAK_LINE);
-        System.out.printf(ColorConfig.BORDER_COLOR + "|" + (option == 8 ? ColorConfig.ACTIVE_COLOR : ColorConfig.ACTION_COLOR) + "  8. " + MenuConst.WIDTH_2_COL + ColorConfig.RESET + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, (userList.size() == 0 ? "Find Friend" : "Add a Friend"));
+        System.out.printf(ColorConfig.BORDER_COLOR + "|" + (option == 8 ? ColorConfig.ACTIVE_COLOR : ColorConfig.ACTION_COLOR) + "  8. " + MenuConst.WIDTH_1_COL + ColorConfig.RESET + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, (userList.size() == 0 ? "Find Friend" : "Add a Friend"));
 
         System.out.println(MenuConst.BREAK_LINE);
         System.out.println(MenuConst.SYS_CTR_FUL_123);
@@ -119,7 +119,7 @@ public final class FriendUI {
         BreakConfig.clearScreen();
         System.out.println(MenuConst.HEADER_FRIEND_REQUEST);
         if (pendingRequestFriends.size() == 0) {
-            System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  => " + MenuConst.WIDTH_2_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "You have no any Friend Request");
+            System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  => " + MenuConst.WIDTH_1_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "You have no any Friend Request");
             System.out.println(MenuConst.BLANK_LINE);
         } else {
             for (Friend friend : pendingRequestFriends) {
@@ -136,7 +136,7 @@ public final class FriendUI {
             }
         }
         System.out.println(MenuConst.BREAK_LINE);
-        System.out.printf(ColorConfig.BORDER_COLOR + "|" + (option == 8 ? ColorConfig.ACTIVE_COLOR : ColorConfig.ACTION_COLOR) + "  8. " + MenuConst.WIDTH_2_COL + ColorConfig.RESET + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "Confirm Request");
+        System.out.printf(ColorConfig.BORDER_COLOR + "|" + (option == 8 ? ColorConfig.ACTIVE_COLOR : ColorConfig.ACTION_COLOR) + "  8. " + MenuConst.WIDTH_1_COL + ColorConfig.RESET + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "Confirm Request");
 
         System.out.println(MenuConst.BREAK_LINE);
         System.out.println(MenuConst.SYS_CTR_FUL_123);
@@ -147,7 +147,7 @@ public final class FriendUI {
         BreakConfig.clearScreen();
         System.out.println(MenuConst.HEADER_SENT_REQUEST);
         if (sentRequestList.size() == 0) {
-            System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  => " + MenuConst.WIDTH_2_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "You have no any Sent Request");
+            System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  => " + MenuConst.WIDTH_1_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "You have no any Sent Request");
             System.out.println(MenuConst.BLANK_LINE);
         } else {
             for (Friend friend : sentRequestList) {
@@ -164,7 +164,7 @@ public final class FriendUI {
             }
         }
         System.out.println(MenuConst.BREAK_LINE);
-        System.out.printf(ColorConfig.BORDER_COLOR + "|" + (option == 8 ? ColorConfig.ACTIVE_COLOR : ColorConfig.ACTION_COLOR) + "  8. " + MenuConst.WIDTH_2_COL + ColorConfig.RESET + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "Cancel Request");
+        System.out.printf(ColorConfig.BORDER_COLOR + "|" + (option == 8 ? ColorConfig.ACTIVE_COLOR : ColorConfig.ACTION_COLOR) + "  8. " + MenuConst.WIDTH_1_COL + ColorConfig.RESET + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "Cancel Request");
 
         System.out.println(MenuConst.BREAK_LINE);
         System.out.println(MenuConst.SYS_CTR_FUL_123);

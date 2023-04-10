@@ -1,11 +1,9 @@
 package app.controller;
 
 import app.model.Chat;
-import app.model.ChatDetail;
 import app.model.User;
 import app.service.chat.ChatServiceIPLM;
 import app.service.chat.IChatService;
-import app.view.user.ChatView;
 
 import java.util.List;
 
@@ -43,5 +41,18 @@ public class ChatController {
     public void sentNewChat(Chat startChat) {
         chatService.save(startChat);
 
+    }
+
+    public Chat findChatDetailByIDAndUser(int id, User loginUser) {
+        for (Chat chat : findAllChatByUser(loginUser)) {
+            if (chat.getChatId() == id) {
+                return chat;
+            }
+        }
+        return null;
+    }
+
+    public void removeChatByChatUser(Chat startChat) {
+        chatService.save(startChat);
     }
 }

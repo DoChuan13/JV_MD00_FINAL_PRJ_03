@@ -48,6 +48,8 @@ public final class MenuConst {
     public static final String INPUT_FR_ID_TO_REMOVE = "Input a Friend Id to Remove: ";
     public static final String INPUT_FR_ID_TO_ADD = "Input a Friend Id to Sent Request: ";
     public static final String INPUT_FR_ID_TO_CHAT = "Input a Friend Id to Start Chat: ";
+
+    public static final String INPUT_CHAT_ID = "Input a Chat Id to Continue Chat: ";
     public static final String INPUT_SEARCH_NAME = "Input Name to Find Friend: ";
     public static final String INPUT_NAME = "Input Name: ";
     public static final String INPUT_USERNAME = "Input UserName: ";
@@ -64,6 +66,7 @@ public final class MenuConst {
     public static final String LOGIN_SUCCESS = ColorConfig.OPTION_COLOR + "Login Successfully!!!" + ColorConfig.RESET;
     public static final String SENT_CHAT_SUCCESS = ColorConfig.OPTION_COLOR + "Sent Chat Successfully!!! Please any key to continue... " + ColorConfig.RESET;
     public static final String DELETE_SUCCESS = ColorConfig.OPTION_COLOR + "Delete Post Successfully!!! Please any key to continue... " + ColorConfig.RESET;
+    public static final String DELETE_CHAT_SUCCESS = ColorConfig.OPTION_COLOR + "Delete Chat Successfully!!! Please any key to continue... " + ColorConfig.RESET;
     public static final String UNFRIEND_SUCCESS = ColorConfig.OPTION_COLOR + "Un-Friend Successful!!! Please any key to continue... " + ColorConfig.RESET;
     public static final String DELETE_REQUEST_SUCCESS = ColorConfig.OPTION_COLOR + "Delete sent request Successful!!! Please any key to continue... " + ColorConfig.RESET;
     public static final String REMOVE_FRIEND_REQUEST_SUCCESS = ColorConfig.OPTION_COLOR + "Remove Friend Request Successful!!! Please any key to continue... " + ColorConfig.RESET;
@@ -92,6 +95,7 @@ public final class MenuConst {
     public static final String CONFIRM_LIKE_POST = ColorConfig.ERROR_COLOR + "Are you sure LIKE of this post? (Y/N)....: " + ColorConfig.RESET;
     public static final String CONFIRM_UNLIKE_POST = ColorConfig.ERROR_COLOR + "Are you sure Un-LIKE of this post? (Y/N)....: " + ColorConfig.RESET;
     public static final String CONFIRM_CHANGE_ROLE = ColorConfig.ERROR_COLOR + "Are you sure ROLE of this user? (Y/N)....: " + ColorConfig.RESET;
+    public static final String CONFIRM_DELETE_CHAT = ColorConfig.ERROR_COLOR + "Are you sure DELETE this chat? (Y/N)....: " + ColorConfig.RESET;
     public static final String FRIEND_PENDING_ALERT = ColorConfig.ERROR_COLOR + "Already sent request!!! Are you want to cancel this request? (Y/N)....: " + ColorConfig.RESET;
     public static final String FRIEND_ALREADY_ALERT = ColorConfig.ERROR_COLOR + "This user is already Friend to you!!! Are you want to Un-Friend? (Y/N)....: " + ColorConfig.RESET;
     public static final String FRIEND_REQUEST_CONFIRM = ColorConfig.ERROR_COLOR + "Are you sure to send add friend request? (Y/N)....: " + ColorConfig.RESET;
@@ -104,7 +108,7 @@ public final class MenuConst {
     public static final String SYS_CTR_MID_12 = ColorConfig.BORDER_COLOR + "|" + ColorConfig.END_COLOR + "  0. Exit                          " + ColorConfig.BACK_COLOR + "9. Back                       " + ColorConfig.END_COLOR + "                       " + ColorConfig.BORDER_COLOR + "|" + ColorConfig.RESET;
     public static final String SYS_CTR_LES_1 = ColorConfig.BORDER_COLOR + "|" + ColorConfig.END_COLOR + "  0. Exit                          " + ColorConfig.BACK_COLOR + "                              " + ColorConfig.END_COLOR + "                       " + ColorConfig.BORDER_COLOR + "|" + ColorConfig.RESET;
     public static final String SYS_CTR_MID_13 = ColorConfig.BORDER_COLOR + "|" + ColorConfig.END_COLOR + "  0. Exit                          " + ColorConfig.BACK_COLOR + "                              " + ColorConfig.END_COLOR + "10. Log Out            " + ColorConfig.BORDER_COLOR + "|" + ColorConfig.RESET;
-    public static final String WIDTH_ACC_LIST = "%-7s" + "%-30s" + "%-30s" + "%-10s" + "%-10s";
+    public static final String WIDTH_5_COL_ACC_LIST = "%-7s" + "%-30s" + "%-30s" + "%-10s" + "%-10s";
     public static final String POST_PUBLIC = "Public";
     public static final String POST_FRIEND = "Friend";
     public static final String POST_PRIVATE = "Private";
@@ -164,15 +168,15 @@ public final class MenuConst {
     public static final String HEADER_FRIEND = MAIN_TITLE + "\n" + TITLE_FRIEND + "\n" + BREAK_LINE;
     //"✧------------------------------- Facebook Fake by DoChuan -------------------------------✧"
     /*==========================================================================Menu Config==========================================================================*/
-    private static final int FULL_1_COL = 83;
-    public static final String WIDTH_2_COL = "%-" + FULL_1_COL + "s";//%-83s"
+    private static final int MAX_WIDTH = 83;
+    public static final String WIDTH_1_COL = "%-" + MAX_WIDTH + "s";//%-83s"
     private static final int MENU_WIDTH = 30;
-    private static final int ONE_CONTENT = FULL_1_COL - MENU_WIDTH;
-    public static final String WITH_ONE_CONTENT = "%-" + MENU_WIDTH + "s" + "%-" + ONE_CONTENT + "s";//%-30s%-53s"
+    private static final int ONE_CONTENT = MAX_WIDTH - MENU_WIDTH;
+    public static final String WIDTH_2_COL = "%-" + MENU_WIDTH + "s" + "%-" + ONE_CONTENT + "s";//%-30s%-53s"
     private static final int COL_1 = 30;
-    private static final int COL_2 = FULL_1_COL - MENU_WIDTH - COL_1;
+    private static final int COL_2 = MAX_WIDTH - MENU_WIDTH - COL_1;
     public static final String WIDTH_3_COL = "%-" + MENU_WIDTH + "s" + "%-" + COL_1 + "s" + "%-" + COL_2 + "s";
     private static final int COL_4_1 = 60;
-    private static final int COL_4_2 = FULL_1_COL - COL_4_1;
+    private static final int COL_4_2 = MAX_WIDTH - COL_4_1;
     public static final String POST_2_COL = "%-" + COL_4_1 + "s" + "%-" + COL_4_2 + "s";
 }
