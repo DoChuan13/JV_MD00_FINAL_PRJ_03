@@ -79,36 +79,41 @@ public final class FriendUI {
         System.out.println(MenuConst.FOOTER);
     }
 
-    public static void showMenuFindNewFriend(int option, List<User> userList, List<Friend> friendList) {
+    public static void showMenuFindNewFriend(int option, List<User> searchUserResult, List<Friend> friendList, User loginUser) {
         BreakConfig.clearScreen();
         System.out.println(MenuConst.HEADER_ADD_FRIEND);
-        if (userList.size() == 0) {
+        if (searchUserResult.size() == 0) {
             System.out.println(MenuConst.BLANK_LINE);
         } else {
-            for (User user : userList) {
-                String status = "";
+            for (User searchUser : searchUserResult) {
+                String status = "Status: Un Friend";
                 for (Friend friend : friendList) {
                     status = "Status: ";
-                    if (friend.getFriend1().getUserId() == user.getUserId() || friend.getFriend2().getUserId() == user.getUserId()) {
+                    if (friend.getFriend1().getUserId() == searchUser.getUserId() || friend.getFriend2().getUserId() == searchUser.getUserId()) {
                         if (friend.getStatus().equals(MenuConst.FRIEND_ACCEPTED)) {
                             status += "Friend";
                             break;
-                        } else if (friend.getStatus().equals(MenuConst.FRIEND_PENDING) || friend.getStatus().equals(MenuConst.FRIEND_REJECT)) {
+                        } else if (friend.getFriend1().getUserId() == loginUser.getUserId() && friend.getStatus().equals(MenuConst.FRIEND_PENDING)) {
                             status += "Sent Request";
                             break;
+                        } else if (friend.getFriend2().getUserId() == loginUser.getUserId() && friend.getStatus().equals(MenuConst.FRIEND_PENDING)) {
+                            status += "Friend Request";
+                            break;
+                        } else {
+                            status += "Un Friend";
                         }
                     } else {
                         status += "Un Friend";
                     }
                 }
-                String userId = "User Id: " + user.getUserId();
-                String name = "Name: " + user.getName();
+                String userId = "User Id: " + searchUser.getUserId();
+                String name = "Name: " + searchUser.getName();
                 System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  => " + MenuConst.WIDTH_3_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, userId, name, status);
                 System.out.println(MenuConst.BLANK_LINE);
             }
         }
         System.out.println(MenuConst.BREAK_LINE);
-        System.out.printf(ColorConfig.BORDER_COLOR + "|" + (option == 8 ? ColorConfig.ACTIVE_COLOR : ColorConfig.ACTION_COLOR) + "  8. " + MenuConst.WIDTH_1_COL + ColorConfig.RESET + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, (userList.size() == 0 ? "Find Friend" : "Add a Friend"));
+        System.out.printf(ColorConfig.BORDER_COLOR + "|" + (option == 8 ? ColorConfig.ACTIVE_COLOR : ColorConfig.ACTION_COLOR) + "  8. " + MenuConst.WIDTH_1_COL + ColorConfig.RESET + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, (searchUserResult.size() == 0 ? "Find Friend" : "Add a Friend"));
 
         System.out.println(MenuConst.BREAK_LINE);
         System.out.println(MenuConst.SYS_CTR_FUL_123);

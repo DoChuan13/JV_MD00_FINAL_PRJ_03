@@ -25,7 +25,7 @@ public class FriendView {
     /*========================================View Friend Page Start========================================*/
     public void manageViewFriendPage() {
         int option;
-        FriendUI.showMenuFriendView(pendingRequestFriends,sentRequestFriends);
+        FriendUI.showMenuFriendView(pendingRequestFriends, sentRequestFriends);
         System.out.print(MenuConst.SELECT_OPTION);
         option = InputConfig.getInteger();
         switch (option) {
@@ -50,7 +50,7 @@ public class FriendView {
             case 0:
                 MainView.exitApplication();
             default:
-                FriendUI.showMenuFriendView(pendingRequestFriends,sentRequestFriends);
+                FriendUI.showMenuFriendView(pendingRequestFriends, sentRequestFriends);
                 MainView.showInvalidOption();
                 InputConfig.pressAnyKey();
                 manageViewFriendPage();
@@ -135,8 +135,9 @@ public class FriendView {
                         System.out.print(MenuConst.CONFIRM_ACCEPT);
                         String confirm = InputConfig.getString();
                         if (confirm.equalsIgnoreCase("Y")) {
-                            FriendUI.showMenuConfirmFriendRequest(option, pendingRequestFriends, loginUser);
                             friend.setStatus(MenuConst.FRIEND_ACCEPTED);
+                            resetTempValue();
+                            FriendUI.showMenuConfirmFriendRequest(option, pendingRequestFriends, loginUser);
                             System.out.print(MenuConst.ACCEPT_SUCCESS);
                             InputConfig.pressAnyKey();
                             break;
@@ -149,6 +150,7 @@ public class FriendView {
                         FriendUI.showMenuConfirmFriendRequest(option, pendingRequestFriends, loginUser);
                         if (confirm.equalsIgnoreCase("Y")) {
                             friend.setStatus(MenuConst.FRIEND_REJECT);
+                            resetTempValue();
                             FriendUI.showMenuConfirmFriendRequest(option, pendingRequestFriends, loginUser);
                             System.out.print(MenuConst.REJECT_SUCCESS);
                             InputConfig.pressAnyKey();
@@ -197,7 +199,7 @@ public class FriendView {
 
     private void manageAddNewFriend() {
         int option = 0;
-        FriendUI.showMenuFindNewFriend(option, searchUserResult, friendList);
+        FriendUI.showMenuFindNewFriend(option, searchUserResult, friendList, loginUser);
         System.out.print(MenuConst.SELECT_OPTION);
         option = InputConfig.getInteger();
         switch (option) {
@@ -214,7 +216,7 @@ public class FriendView {
             case 0:
                 MainView.exitApplication();
             default:
-                FriendUI.showMenuFindNewFriend(option, searchUserResult, friendList);
+                FriendUI.showMenuFindNewFriend(option, searchUserResult, friendList, loginUser);
                 MainView.showInvalidOption();
                 InputConfig.pressAnyKey();
                 manageAddNewFriend();
@@ -308,77 +310,175 @@ public class FriendView {
 
     private void sentAddFriendRequest(int option) {
         if (searchUserResult.size() == 0) {
-            FriendUI.showMenuFindNewFriend(option, searchUserResult, friendList);
+            FriendUI.showMenuFindNewFriend(option, searchUserResult, friendList, loginUser);
             System.out.print(MenuConst.INPUT_SEARCH_NAME);
             String name = InputConfig.getString();
             searchUserResult = userController.findUserWithoutMe(loginUser, name);//filter Me and Admin/PM
             if (searchUserResult.size() == 0) {
-                FriendUI.showMenuFindNewFriend(option, searchUserResult, friendList);
+                FriendUI.showMenuFindNewFriend(option, searchUserResult, friendList, loginUser);
                 System.out.print(MenuConst.RESULT_NOT_FOUND);
                 InputConfig.pressAnyKey();
             }
             manageAddNewFriend();
         } else {
-            FriendUI.showMenuFindNewFriend(option, searchUserResult, friendList);
+            FriendUI.showMenuFindNewFriend(option, searchUserResult, friendList, loginUser);
             System.out.print(MenuConst.INPUT_FR_ID_TO_ADD);
             int id = InputConfig.getInteger();
             User friendUser = selectUserToAddFriend(id);
-            FriendUI.showMenuFindNewFriend(option, searchUserResult, friendList);
+            FriendUI.showMenuFindNewFriend(option, searchUserResult, friendList, loginUser);
             if (friendUser == null) {
                 System.out.print(MenuConst.RESULT_NOT_FOUND);
                 InputConfig.pressAnyKey();
                 manageAddNewFriend();
             } else {
                 boolean checkFriendStatus = true;
+                Friend rejectedFriend = null;
                 for (Friend friend : friendList) {
-                    //Remove pending request
-                    if (friend.getFriend2().getUserId() == id) {
-                        if (!friend.getStatus().equalsIgnoreCase(MenuConst.FRIEND_ACCEPTED)) {
-                            checkFriendStatus = false;
-                            System.out.print(MenuConst.FRIEND_PENDING_ALERT);
-                            String confirm = InputConfig.getString();
-                            if (confirm.equalsIgnoreCase("Y")) {
-                                friendController.deleteFriend(friend);
-                                resetTempValue();
-                                System.out.print(MenuConst.REMOVE_FRIEND_REQUEST_SUCCESS);
-                                InputConfig.pressAnyKey();
-                                manageViewFriendPage();
-                            } else manageAddNewFriend();
-                        }
-                    }
+                    //Remove sent request
+                    checkFriendStatus = removeSentRequest(option, id, checkFriendStatus, friend);
                     //Remove friend
-                    if (friend.getFriend1().getUserId() == id || friend.getFriend2().getUserId() == id) {
-                        if (friend.getStatus().equalsIgnoreCase(MenuConst.FRIEND_ACCEPTED)) {
-                            checkFriendStatus = false;
-                            System.out.print(MenuConst.FRIEND_ALREADY_ALERT);
-                            String confirm = InputConfig.getString();
-                            if (confirm.equalsIgnoreCase("Y")) {
-                                friendController.deleteFriend(friend);
-                                resetTempValue();
-                                System.out.print(MenuConst.REMOVE_FRIEND_REQUEST_SUCCESS);
-                                InputConfig.pressAnyKey();
-                                manageViewFriendPage();
-                            } else manageAddNewFriend();
+                    checkFriendStatus = removeFriendStatus(option, id, checkFriendStatus, friend);
+                    //Confirm friend request
+                    checkFriendStatus = responseFriendRequest(option, id, checkFriendStatus, friend);
+                    if (friend.getFriend1().getUserId() == id) {
+                        if (friend.getStatus().equalsIgnoreCase(MenuConst.FRIEND_REJECT)) {
+                            rejectedFriend = friend;
                         }
                     }
                 }
                 if (checkFriendStatus) {
                     //Send friend request
-                    System.out.print(MenuConst.FRIEND_REQUEST_CONFIRM);
-                    String confirm = InputConfig.getString();
-                    if (confirm.equalsIgnoreCase("Y")) {
-                        int friendId = friendController.generateFriendId();
-                        Friend newFriend = new Friend(friendId, loginUser, friendUser, MenuConst.FRIEND_PENDING);
-                        friendController.sentFriendRequest(newFriend);
-                        resetTempValue();
-                        System.out.print(MenuConst.SEND_FRIEND_REQUEST_SUCCESS);
-                        InputConfig.pressAnyKey();
-                        manageViewFriendPage();
-                    } else manageAddNewFriend();
+                    sentFriendRequest(option, friendUser, rejectedFriend);
                 }
                 manageViewFriendPage();
             }
         }
+    }
+
+    private void sentFriendRequest(int option, User friendUser, Friend rejectedFriend) {
+        FriendUI.showMenuFindNewFriend(option, searchUserResult, friendList, loginUser);
+        System.out.print(MenuConst.FRIEND_REQUEST_CONFIRM);
+        String confirm = InputConfig.getString();
+        if (confirm.equalsIgnoreCase("Y")) {
+            int friendId = friendController.generateFriendId();
+            Friend newFriend;
+            if (rejectedFriend == null) {
+                newFriend = new Friend(friendId, loginUser, friendUser, MenuConst.FRIEND_PENDING);
+            } else {
+                rejectedFriend.setFriend1(loginUser);
+                rejectedFriend.setFriend2(friendUser);
+                rejectedFriend.setStatus(MenuConst.FRIEND_PENDING);
+                newFriend = rejectedFriend;
+            }
+            friendController.sentFriendRequest(newFriend);
+            FriendUI.showMenuFindNewFriend(option, searchUserResult, friendList, loginUser);
+            System.out.print(MenuConst.SEND_FRIEND_REQUEST_SUCCESS);
+            resetTempValue();
+            InputConfig.pressAnyKey();
+            manageViewFriendPage();
+        } else manageAddNewFriend();
+    }
+
+    private boolean responseFriendRequest(int option, int id, boolean checkFriendStatus, Friend friend) {
+        if (friend.getFriend1().getUserId() == id) {
+            if (friend.getStatus().equalsIgnoreCase(MenuConst.FRIEND_PENDING)) {
+                checkFriendStatus = false;
+                FriendUI.showMenuFindNewFriend(option, searchUserResult, friendList, loginUser);
+                System.out.print(MenuConst.FRIEND_REQUEST_ALERT);
+                String confirmAction = InputConfig.getString();
+                if (confirmAction.equalsIgnoreCase("Y")) {
+                    //Confirm Friend Request
+                    while (true) {
+                        FriendUI.showMenuFindNewFriend(option, searchUserResult, friendList, loginUser);
+                        System.out.println(MenuConst.REQUIRE_FRIEND_STATUS);
+                        System.out.print(MenuConst.CHANGE_FRIEND_STATUS + "(with User " + friend.getFriend1().getName() + ":) ");
+                        String status = InputConfig.getString();
+                        if (status.equalsIgnoreCase("Accept")) {
+                            FriendUI.showMenuFindNewFriend(option, searchUserResult, friendList, loginUser);
+                            System.out.print(MenuConst.CONFIRM_ACCEPT);
+                            String confirm = InputConfig.getString();
+                            if (confirm.equalsIgnoreCase("Y")) {
+                                friend.setStatus(MenuConst.FRIEND_ACCEPTED);
+                                resetTempValue();
+                                FriendUI.showMenuFindNewFriend(option, searchUserResult, friendList, loginUser);
+                                System.out.print(MenuConst.ACCEPT_SUCCESS);
+                                InputConfig.pressAnyKey();
+                                break;
+                            }
+                        }
+                        if (status.equalsIgnoreCase("Reject")) {
+                            FriendUI.showMenuFindNewFriend(option, searchUserResult, friendList, loginUser);
+                            System.out.print(MenuConst.CONFIRM_REJECT);
+                            String confirm = InputConfig.getString();
+                            FriendUI.showMenuFindNewFriend(option, searchUserResult, friendList, loginUser);
+                            if (confirm.equalsIgnoreCase("Y")) {
+                                friend.setStatus(MenuConst.FRIEND_REJECT);
+                                resetTempValue();
+                                FriendUI.showMenuFindNewFriend(option, searchUserResult, friendList, loginUser);
+                                System.out.print(MenuConst.REJECT_SUCCESS);
+                                InputConfig.pressAnyKey();
+                                break;
+                            }
+                        } else {
+                            FriendUI.showMenuFindNewFriend(option, searchUserResult, friendList, loginUser);
+                            System.out.println(MenuConst.INVALID_STATUS);
+                            InputConfig.pressAnyKey();
+                        }
+                    }
+
+
+                    friendController.deleteFriend(friend);
+                    FriendUI.showMenuFindNewFriend(option, searchUserResult, friendList, loginUser);
+                    System.out.print(MenuConst.REMOVE_FRIEND_STATUS_SUCCESS);
+                    resetTempValue();
+                    InputConfig.pressAnyKey();
+                    manageViewFriendPage();
+                } else manageAddNewFriend();
+            }
+        }
+        friendController.changeFriendStatus(friend);
+        resetTempValue();
+        return checkFriendStatus;
+    }
+
+    private boolean removeFriendStatus(int option, int id, boolean checkFriendStatus, Friend friend) {
+        if (friend.getFriend1().getUserId() == id || friend.getFriend2().getUserId() == id) {
+            if (friend.getStatus().equalsIgnoreCase(MenuConst.FRIEND_ACCEPTED)) {
+                checkFriendStatus = false;
+                FriendUI.showMenuFindNewFriend(option, searchUserResult, friendList, loginUser);
+                System.out.print(MenuConst.FRIEND_ALREADY_ALERT);
+                String confirm = InputConfig.getString();
+                if (confirm.equalsIgnoreCase("Y")) {
+                    friendController.deleteFriend(friend);
+                    FriendUI.showMenuFindNewFriend(option, searchUserResult, friendList, loginUser);
+                    System.out.print(MenuConst.REMOVE_FRIEND_STATUS_SUCCESS);
+                    resetTempValue();
+                    InputConfig.pressAnyKey();
+                    manageViewFriendPage();
+                } else manageAddNewFriend();
+            }
+        }
+        return checkFriendStatus;
+    }
+
+    private boolean removeSentRequest(int option, int id, boolean checkFriendStatus, Friend friend) {
+        if (friend.getFriend2().getUserId() == id) {
+            if (!friend.getStatus().equalsIgnoreCase(MenuConst.FRIEND_ACCEPTED)) {
+                checkFriendStatus = false;
+                FriendUI.showMenuFindNewFriend(option, searchUserResult, friendList, loginUser);
+                System.out.print(MenuConst.FRIEND_PENDING_ALERT);
+                String confirm = InputConfig.getString();
+                if (confirm.equalsIgnoreCase("Y")) {
+                    friendController.deleteFriend(friend);
+                    FriendUI.showMenuFindNewFriend(option, searchUserResult, friendList, loginUser);
+                    System.out.print(MenuConst.REMOVE_FRIEND_REQUEST_SUCCESS);
+                    resetTempValue();
+                    InputConfig.pressAnyKey();
+                    manageViewFriendPage();
+                } else manageAddNewFriend();
+            }
+        }
+        return checkFriendStatus;
     }
 
     private User selectUserToAddFriend(int id) {

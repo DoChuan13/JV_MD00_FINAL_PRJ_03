@@ -192,11 +192,12 @@ public class PostView {
         System.out.print(MenuConst.SELECT_OPTION);
         option = InputConfig.getInteger();
         switch (option) {
-            case 7:
-                getNewComment(detailPost, option);
-                break;
             case 8:
-                checkNewComment(detailPost, option);
+                if (comment.length() == 0) {
+                    getNewComment(detailPost, option);
+                } else {
+                    checkNewComment(detailPost, option);
+                }
                 break;
             case 9:
                 resetTempValue();

@@ -70,6 +70,7 @@ public final class MenuConst {
     public static final String UNFRIEND_SUCCESS = ColorConfig.OPTION_COLOR + "Un-Friend Successful!!! Please any key to continue... " + ColorConfig.RESET;
     public static final String DELETE_REQUEST_SUCCESS = ColorConfig.OPTION_COLOR + "Delete sent request Successful!!! Please any key to continue... " + ColorConfig.RESET;
     public static final String REMOVE_FRIEND_REQUEST_SUCCESS = ColorConfig.OPTION_COLOR + "Remove Friend Request Successful!!! Please any key to continue... " + ColorConfig.RESET;
+    public static final String REMOVE_FRIEND_STATUS_SUCCESS = ColorConfig.OPTION_COLOR + "Remove Friend Status Successful!!! Please any key to continue... " + ColorConfig.RESET;
     public static final String SEND_FRIEND_REQUEST_SUCCESS = ColorConfig.OPTION_COLOR + "Sent Friend Request Successful!!! Please any key to continue... " + ColorConfig.RESET;
     public static final String BLOCK_USER_SUCCESS = ColorConfig.OPTION_COLOR + "Blocked Account Successful!!! Please any key to continue... " + ColorConfig.RESET;
     public static final String UNBLOCK_USER_SUCCESS = ColorConfig.OPTION_COLOR + "Un-Blocked Account Successful!!! Please any key to continue... " + ColorConfig.RESET;
@@ -98,6 +99,7 @@ public final class MenuConst {
     public static final String CONFIRM_DELETE_CHAT = ColorConfig.ERROR_COLOR + "Are you sure DELETE this chat? (Y/N)....: " + ColorConfig.RESET;
     public static final String FRIEND_PENDING_ALERT = ColorConfig.ERROR_COLOR + "Already sent request!!! Are you want to cancel this request? (Y/N)....: " + ColorConfig.RESET;
     public static final String FRIEND_ALREADY_ALERT = ColorConfig.ERROR_COLOR + "This user is already Friend to you!!! Are you want to Un-Friend? (Y/N)....: " + ColorConfig.RESET;
+    public static final String FRIEND_REQUEST_ALERT = ColorConfig.ERROR_COLOR + "You have a Friend Request from this user!!! Are you want to Confirm? (Y/N)....: " + ColorConfig.RESET;
     public static final String FRIEND_REQUEST_CONFIRM = ColorConfig.ERROR_COLOR + "Are you sure to send add friend request? (Y/N)....: " + ColorConfig.RESET;
     /*==========================================================================Menu==========================================================================*/
     public static final String BREAK_LINE = ColorConfig.BORDER_COLOR + "✧----------------------------------------------------------------------------------------✧" + ColorConfig.RESET;
