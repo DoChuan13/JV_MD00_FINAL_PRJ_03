@@ -3,7 +3,10 @@ package app.view.main;
 import app.config.BreakConfig;
 import app.config.ColorConfig;
 import app.config.MenuConst;
+import app.model.RoleName;
 import app.model.User;
+
+import java.util.ArrayList;
 
 public final class MainUI {
     /*----------------------------------------------------------MENU----------------------------------------------------------*/
@@ -52,6 +55,19 @@ public final class MainUI {
         System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.ACTION_COLOR + "  6. " + MenuConst.WIDTH_1_COL + ColorConfig.RESET + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "Register");
         System.out.println(MenuConst.BREAK_LINE);
         System.out.println(MenuConst.SYS_CTR_MID_12);
+        System.out.println(MenuConst.FOOTER);
+    }
+
+    public static void showMenuWelcome(User loginUser) {
+        RoleName roleName = new ArrayList<>(loginUser.getRole()).get(0).getName();
+        String loginName = roleName == RoleName.ADMIN ? "" : loginUser.getName();
+        BreakConfig.clearScreen();
+        System.out.println(MenuConst.HEADER_WELCOME);
+        System.out.println(MenuConst.BLANK_LINE);
+        System.out.printf(ColorConfig.BORDER_COLOR + "|%-38sWELCOME %-42s|\n" + ColorConfig.RESET, "", roleName);
+        System.out.printf(ColorConfig.BORDER_COLOR + "|%-40s%-48s|\n" + ColorConfig.RESET, "", loginName);
+
+        System.out.println(MenuConst.BLANK_LINE);
         System.out.println(MenuConst.FOOTER);
     }
 

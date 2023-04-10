@@ -14,14 +14,14 @@ import java.util.List;
 import java.util.Set;
 
 public class AdminView {
-    private final UserController userController = new UserController();
-    private final FriendController friendController = new FriendController();
-    private final PostController postController = new PostController();
-    private final ChatController chatController = new ChatController();
-    private final RoleController roleController = new RoleController();
-    private User loginUser = userController.getLoginUser();
-    private List<User> userList = userController.getUserList();
-    private String password = "", newPassword = "", rePassword = "";
+    private static final UserController userController = new UserController();
+    private static final FriendController friendController = new FriendController();
+    private static final PostController postController = new PostController();
+    private static final ChatController chatController = new ChatController();
+    private static final RoleController roleController = new RoleController();
+    private static User loginUser = userController.getLoginUser();
+    private static List<User> userList = userController.getUserList();
+    private static String password = "", newPassword = "", rePassword = "";
 
     public AdminView() {
     }

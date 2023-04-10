@@ -13,14 +13,14 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class FriendView {
-    private final UserController userController = new UserController();
-    private final FriendController friendController = new FriendController();
-    private List<User> searchUserResult = new LinkedList<>();
-    private User loginUser = userController.getLoginUser();
-    private List<Friend> friendList = friendController.getListAllFriend(loginUser);
-    private List<Friend> acceptedFriends = friendController.getAcceptedFriendList(loginUser);
-    private List<Friend> pendingRequestFriends = friendController.getPendingFriendList(loginUser);
-    private List<Friend> sentRequestFriends = friendController.getSentRequestList(loginUser);
+    private static final UserController userController = new UserController();
+    private static final FriendController friendController = new FriendController();
+    private static List<User> searchUserResult = new LinkedList<>();
+    private static User loginUser = userController.getLoginUser();
+    private static List<Friend> friendList = friendController.getListAllFriend(loginUser);
+    private static List<Friend> acceptedFriends = friendController.getAcceptedFriendList(loginUser);
+    private static List<Friend> pendingRequestFriends = friendController.getPendingFriendList(loginUser);
+    private static List<Friend> sentRequestFriends = friendController.getSentRequestList(loginUser);
 
     /*========================================View Friend Page Start========================================*/
     public void manageViewFriendPage() {

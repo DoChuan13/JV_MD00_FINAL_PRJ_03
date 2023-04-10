@@ -45,19 +45,23 @@ public final class FriendUI {
             System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  => " + MenuConst.WIDTH_1_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "You have no any Friend");
         } else {
             String friendName;
+            String friendIdTitle = "Friend Id: ";
+            String friendNameViewTitle = "Full Name: ";
+            System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  => " + MenuConst.WIDTH_2_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, friendIdTitle, friendNameViewTitle);
             for (Friend friend : acceptedFriends) {
                 if (friend.getFriend1().getUserId() == currentUser.getUserId()) {
                     friendName = friend.getFriend2().getName();
-                    String friendId = "Friend Id: " + friend.getFriendId();
-                    String friendNameView = "Name: " + friendName;
-                    System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  => " + MenuConst.WIDTH_2_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, friendId, friendNameView);
+                    String friendId = String.valueOf(friend.getFriendId());
+                    String friendNameView = friendName;
+                    System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "     " + MenuConst.WIDTH_2_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, friendId, friendNameView);
                 } else {
                     friendName = friend.getFriend1().getName();
-                    String friendId = "Friend Id: " + friend.getFriendId();
-                    String friendNameView = "Name: " + friendName;
-                    System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  => " + MenuConst.WIDTH_2_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, friendId, friendNameView);
+                    String friendId = String.valueOf(friend.getFriendId());
+                    String friendNameView = friendName;
+                    System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "     " + MenuConst.WIDTH_2_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, friendId, friendNameView);
                 }
             }
+            System.out.println(MenuConst.BLANK_LINE);
         }
     }
 
@@ -85,10 +89,14 @@ public final class FriendUI {
         if (searchUserResult.size() == 0) {
             System.out.println(MenuConst.BLANK_LINE);
         } else {
+            String userIdTitle = "User Id";
+            String nameTitle = "Full Name: ";
+            String statusTitle = "Status: ";
+            System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  => " + MenuConst.WIDTH_3_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, userIdTitle, nameTitle, statusTitle);
             for (User searchUser : searchUserResult) {
-                String status = "Status: Un Friend";
+                String status = "";
                 for (Friend friend : friendList) {
-                    status = "Status: ";
+                    status = "";
                     if (friend.getFriend1().getUserId() == searchUser.getUserId() || friend.getFriend2().getUserId() == searchUser.getUserId()) {
                         if (friend.getStatus().equals(MenuConst.FRIEND_ACCEPTED)) {
                             status += "Friend";
@@ -106,10 +114,9 @@ public final class FriendUI {
                         status += "Un Friend";
                     }
                 }
-                String userId = "User Id: " + searchUser.getUserId();
-                String name = "Name: " + searchUser.getName();
-                System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  => " + MenuConst.WIDTH_3_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, userId, name, status);
-                System.out.println(MenuConst.BLANK_LINE);
+                String userId = String.valueOf(searchUser.getUserId());
+                String name = searchUser.getName();
+                System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "     " + MenuConst.WIDTH_3_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, userId, name, status);
             }
         }
         System.out.println(MenuConst.BREAK_LINE);

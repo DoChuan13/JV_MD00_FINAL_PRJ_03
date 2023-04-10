@@ -18,9 +18,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class MainView {
-    private final UserController userController = new UserController();
-    private User tempUser = new User();
-    private String userName = "", password = "", rePassword = "";
+    private static final UserController userController = new UserController();
+    private static User loginUser = userController.getLoginUser();
+    private static User tempUser = new User();
+    private static String userName = "", password = "", rePassword = "";
 
     public static void exitApplication() {
         MainUI.showAlertExitApp();
@@ -134,19 +135,21 @@ public class MainView {
             InputConfig.pressAnyKey();
             loginUser();
         } else {
-            userName = password = "";
+            resetTempValue();
             User user = userController.getLoginUser();
             RoleName roleName = new ArrayList<>(user.getRole()).get(0).getName();
+            MainUI.showMenuWelcome(loginUser);
+            System.out.print(MenuConst.DIRECT_TO_DETAIL);
             if (roleName == RoleName.USER) {
-                System.out.println("Welcome User");
+                //System.out.println("Welcome User");
                 InputConfig.pressAnyKey();
                 new UserView().managerUserDetail();
             } else if (roleName == RoleName.PM) {
-                System.out.println("Welcome Product Manager");
+                //System.out.println("Welcome Product Manager");
                 InputConfig.pressAnyKey();
                 new PmView().managerPmDetail();
             } else {
-                System.out.println("Welcome Admin");
+                //System.out.println("Welcome Admin");
                 InputConfig.pressAnyKey();
                 new AdminView().managerAdminDetail();
             }
@@ -311,5 +314,6 @@ public class MainView {
     private void resetTempValue() {
         userName = password = rePassword = "";
         tempUser = new User();
+        loginUser = userController.getLoginUser();
     }
 }

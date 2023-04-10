@@ -8,7 +8,6 @@ import app.model.ChatDetail;
 import app.model.User;
 import app.view.post.PostUI;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public final class ChatUI {
@@ -25,17 +24,14 @@ public final class ChatUI {
     }
 
     public static void showMenuNewChat(int option, List<User> userList) {
-        String userId = "Id";
-        String userName = "User Name";
-        String name = "Full Name";
-        String status = "Status";
-        String role = "Role";
+        String friendIdTitle = "User Id: ";
+        String friendNameViewTitle = "Full Name: ";
         BreakConfig.clearScreen();
         System.out.println(MenuConst.HEADER_CHAT_PAGE);
         if (userList.size() == 0) {
             System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  => " + MenuConst.WIDTH_1_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "You have no any Result");
         } else {
-            System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + " " + MenuConst.WIDTH_5_COL_ACC_LIST + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, userId, userName, name, status, role);
+            System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  => " + MenuConst.WIDTH_2_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, friendIdTitle, friendNameViewTitle);
         }
         for (User user : userList) {
             showUserList(user);
@@ -64,8 +60,13 @@ public final class ChatUI {
             }
             for (ChatDetail chatContent : currentChat.getChatContent()) {
                 if (timeIn <= chatContent.getSentTime().getTime()) {
-                    System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  => " + MenuConst.WIDTH_1_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "User: " + chatContent.getUser().getName());
-                    System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "     " + MenuConst.WIDTH_1_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "Content: " + chatContent.getContent());
+                    if (chatContent.getUser().getUserId() == loginUser.getUserId()) {
+                        System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  => " + MenuConst.WIDTH_1_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "(User: " + chatContent.getUser().getName() + ")");
+                        System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "     " + MenuConst.WIDTH_1_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "(Content): " + chatContent.getContent());
+                    } else {
+                        System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  <= " + MenuConst.WIDTH_1_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "(User: " + chatContent.getUser().getName() + ")");
+                        System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "     " + MenuConst.WIDTH_1_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "(Content): " + chatContent.getContent());
+                    }
                     System.out.println(MenuConst.BLANK_LINE);
                 }
             }
@@ -73,7 +74,7 @@ public final class ChatUI {
 
         System.out.println(MenuConst.BREAK_LINE);
         System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  => " + MenuConst.WIDTH_1_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "User: " + loginUser.getName());
-        System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + (option == 8 ? ColorConfig.ACTIVE_COLOR : ColorConfig.INACTIVE_COLOR) + "  => " + MenuConst.WIDTH_1_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "Chat Content: ");
+        System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + (option == 8 ? ColorConfig.ACTIVE_COLOR : ColorConfig.INACTIVE_COLOR) + "     " + MenuConst.WIDTH_1_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "Chat Content: ");
         breakLineContent(option, chatDetail.getContent());
 
         System.out.println(MenuConst.BREAK_LINE);
@@ -85,12 +86,9 @@ public final class ChatUI {
     }
 
     private static void showUserList(User user) {
-        String userId = String.valueOf(user.getUserId());
-        String userName = user.getUserName();
-        String name = user.getName();
-        String status = (!user.isStatus()) ? "Active" : "Blocked";
-        String roleName = String.valueOf(new ArrayList<>(user.getRole()).get(0).getName());
-        System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + " " + MenuConst.WIDTH_5_COL_ACC_LIST + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, userId, userName, name, status, roleName);
+        String friendId = String.valueOf(user.getUserId());
+        String friendName = user.getUserName();
+        System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  => " + MenuConst.WIDTH_2_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, friendId, friendName);
         System.out.println(MenuConst.BLANK_LINE);
     }
 
@@ -102,7 +100,7 @@ public final class ChatUI {
         BreakConfig.clearScreen();
         System.out.println(MenuConst.HEADER_CHAT_LIST);
         if (chatList.size() == 0) {
-            System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  => " + MenuConst.WIDTH_1_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "You have no any Chat");
+            System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "     " + MenuConst.WIDTH_1_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "You have no any Chat");
             System.out.println(MenuConst.BLANK_LINE);
         } else {
             for (Chat chat : chatList) {
@@ -115,8 +113,8 @@ public final class ChatUI {
                 String chatIdView = "Chat ID: " + chat.getChatId();
                 String chatUserView = "User: " + targetChat;
                 System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  => " + MenuConst.WIDTH_2_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, chatIdView, chatUserView);
-                System.out.println(MenuConst.BLANK_LINE);
             }
+            System.out.println(MenuConst.BLANK_LINE);
         }
 
         if (chatList.size() != 0) {

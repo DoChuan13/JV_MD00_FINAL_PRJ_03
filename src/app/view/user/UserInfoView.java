@@ -14,14 +14,14 @@ import app.view.user.ui.UserInfoUI;
 import java.util.Date;
 
 public class UserInfoView {
-    private final UserController userController = new UserController();
-    private final FriendController friendController = new FriendController();
-    private final PostController postController = new PostController();
-    private final ChatController chatController = new ChatController();
-    private User loginUser = userController.getLoginUser();
-    private long updatedEmailTime = loginUser.getEmailUpdatedTime().getTime();
-    private long updatedUserNameTime = loginUser.getUserUpdatedTime().getTime();
-    private String password = "", newPassword = "", rePassword = "";
+    private static final UserController userController = new UserController();
+    private static final FriendController friendController = new FriendController();
+    private static final PostController postController = new PostController();
+    private static final ChatController chatController = new ChatController();
+    private static User loginUser = userController.getLoginUser();
+    private static long updatedEmailTime = loginUser.getEmailUpdatedTime().getTime();
+    private static long updatedUserNameTime = loginUser.getUserUpdatedTime().getTime();
+    private static String password = "", newPassword = "", rePassword = "";
 
     public UserInfoView() {
     }

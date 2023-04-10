@@ -13,9 +13,9 @@ import java.util.ArrayList;
 
 public class Main {
     private static final UserController userController = new UserController();
-    private static final User loginUser = userController.getLoginUser();
 
     public Main() {
+        User loginUser = userController.getLoginUser();
         if (loginUser == null) {
             new MainView().showMainIndex();
         } else {

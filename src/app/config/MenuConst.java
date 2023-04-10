@@ -62,6 +62,7 @@ public final class MenuConst {
     public static final String INPUT_COMMENT = "Input Comment: ";
     public static final String INPUT_CHAT = "Input Chat: ";
     public static final String CHANGE_FRIEND_STATUS = "Input Friend Action: ";
+    public static final String DIRECT_TO_DETAIL = ColorConfig.OPTION_COLOR + "Please any key to continue... " + ColorConfig.RESET;
     public static final String COMMENT_SUCCESS = ColorConfig.OPTION_COLOR + "Create New Comment Successfully!!! Please any key to continue... " + ColorConfig.RESET;
     public static final String LOGIN_SUCCESS = ColorConfig.OPTION_COLOR + "Login Successfully!!!" + ColorConfig.RESET;
     public static final String SENT_CHAT_SUCCESS = ColorConfig.OPTION_COLOR + "Sent Chat Successfully!!! Please any key to continue... " + ColorConfig.RESET;

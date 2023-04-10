@@ -1,23 +1,24 @@
 package app.config;
 
 public final class DirectPage implements Runnable {
-    private Thread thread;
-
-    public void directPage() {
-        if (thread == null) {
-            thread = new Thread(this);
-        }
-        thread.start();
-    }
+    private static Thread thread = null;
 
     @Override
     public void run() {
         try {
-            for (int i = 0; i < 2; i++) {
-                Thread.sleep(3000);
+            for (int i = 0; i < 5; i++) {
+                System.out.println("Direct Page in " + i + " s");
+                Thread.sleep(1000);
             }
         } catch (Exception errException) {
             errException.printStackTrace();
         }
+    }
+
+    public void start() {
+        if (thread == null) {
+            thread = new Thread(this);
+        }
+        thread.start();
     }
 }
