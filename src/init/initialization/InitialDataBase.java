@@ -35,9 +35,6 @@ public class InitialDataBase {
 
     public InitialDataBase() {
         initialUserDB();
-        initFriendDB();
-        intPostDB();
-        intChatDB();
     }
 
     private void initialUserDB() {
@@ -64,6 +61,9 @@ public class InitialDataBase {
             userList.add(ducDat);
             userList.add(dinhHong);
             new IOFileConfig<User>().writeFile(DataBase.PATH_USER, userList);
+            intPostDB();
+            initFriendDB();
+            intChatDB();
         }
     }
 

@@ -123,13 +123,13 @@ public final class PostUI {
     public static void showPostInfo(Post post) {
         String postIdView = "(" + "Post ID: " + post.getPostId() + ")";
         String ownerUserView = "(User: " + post.getOwnUser().getName() + ")";
-        String postContentView = "(Content)";
+        //String postContentView = "(Content)";
         String postStatusView = "Status: " + post.getPostStatus();
         String postLikeView = "Like: " + post.getLikeList().size();
         String postCommentView = "Comment: " + post.getCommentList().size();
 
         System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  => " + MenuConst.POST_2_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, ownerUserView, postIdView);
-        System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "     " + MenuConst.WIDTH_1_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, postContentView);
+        //System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "     " + MenuConst.WIDTH_1_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, postContentView);
         breakLineContent((byte) 0, (byte) 1, post.getPostContent());
         System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "     " + MenuConst.WIDTH_3_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, postStatusView, postLikeView, postCommentView);
         System.out.println(MenuConst.BLANK_LINE);
@@ -137,14 +137,14 @@ public final class PostUI {
 
     private static void showUpdatePostDetail(int option, Post post) {
         String postIdView = "(" + "Post ID: " + post.getPostId() + ")";
-        String postContentView = "(Content)";
+        //String postContentView = "(Content)";
         String postStatusView = "Status: " + post.getPostStatus();
         String postLikeView = "Like: " + post.getLikeList().size();
         String postCommentView = "Comment: " + post.getCommentList().size();
         String ownerUserView = "User: " + post.getOwnUser().getName();
 
         System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  => " + MenuConst.POST_2_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, ownerUserView, postIdView);
-        System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + (option == 6 ? ColorConfig.ACTIVE_COLOR : ColorConfig.INACTIVE_COLOR) + "     " + MenuConst.WIDTH_1_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, postContentView);
+        //System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + (option == 6 ? ColorConfig.ACTIVE_COLOR : ColorConfig.INACTIVE_COLOR) + "     " + MenuConst.WIDTH_1_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, postContentView);
         breakLineContent(option, (byte) 6, post.getPostContent());
         System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + (option == 7 ? ColorConfig.ACTIVE_COLOR : ColorConfig.INACTIVE_COLOR) + "     " + MenuConst.WIDTH_3_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, postStatusView, postLikeView, postCommentView);
         System.out.println(MenuConst.BLANK_LINE);
@@ -180,12 +180,12 @@ public final class PostUI {
     }
 
     private static void showAllComment(Comment comment, User commentUser) {
-        String userStatusView = "Status: " + ((commentUser == null) ? "Unavailable" : (!commentUser.getValidateUserId().equals(comment.getCommentUser().getValidateUserId()) ? "Unavailable" : "Active"));
         String commentUserView = "User: " + comment.getCommentUser().getName();
-        String userIdView = "User Id: " + comment.getCommentUser().getUserId();
-        String commentContentView = "(Content)";
+        String userStatusView = "Status: " + ((commentUser == null) ? "Unavailable" : (!commentUser.getValidateUserId().equals(comment.getCommentUser().getValidateUserId()) ? "Unavailable" : "Active"));
+        String userIdView = "User Id: " + ((commentUser == null) ? "Unknown" : (!commentUser.getValidateUserId().equals(comment.getCommentUser().getValidateUserId()) ? "Unknown" : comment.getCommentUser().getUserId()));
+        //String commentContentView = "(Content)";
         System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  => " + MenuConst.WIDTH_3_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, commentUserView, userStatusView, userIdView);
-        System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  => " + MenuConst.WIDTH_1_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, commentContentView);
+        //System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  => " + MenuConst.WIDTH_1_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, commentContentView);
         breakLineContent((byte) 0, (byte) 1, comment.getComment());
         System.out.println(MenuConst.BLANK_LINE);
     }
