@@ -6,8 +6,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class User implements Serializable {
+    private final long createdTime = System.nanoTime();
     private int userId = 0;
-    private String validateUserId = userId + String.valueOf(System.nanoTime());
     private String name = "";
     private String userName = "";
     private Boolean gender = null;
@@ -24,7 +24,6 @@ public class User implements Serializable {
 
     public User(int userId, String name, String userName, Boolean gender, String email, String password, boolean status, Set<Role> role) {
         this.userId = userId;
-        this.validateUserId = userId + String.valueOf(System.nanoTime());
         this.name = name;
         this.userName = userName;
         this.gender = gender;
@@ -36,7 +35,6 @@ public class User implements Serializable {
 
     public User(int userId, String name, String userName, Boolean gender, String email, String password, String avatar, boolean status, Set<Role> role) {
         this.userId = userId;
-        this.validateUserId = userId + " - " + System.nanoTime();
         this.name = name;
         this.userName = userName;
         this.gender = gender;
@@ -49,7 +47,6 @@ public class User implements Serializable {
 
     public User(int userId, String name, String userName, String email, String password, Set<Role> role) {
         this.userId = userId;
-        this.validateUserId = userId + " - " + System.nanoTime();
         this.name = name;
         this.userName = userName;
         this.gender = null;
@@ -60,8 +57,8 @@ public class User implements Serializable {
         this.role = role;
     }
 
-    public String getValidateUserId() {
-        return validateUserId;
+    public long getCreatedTime() {
+        return createdTime;
     }
 
     public Boolean getGender() {
@@ -160,7 +157,7 @@ public class User implements Serializable {
     public String toString() {
         return "User{" +
                 "userId=" + userId +
-                ", validateUserId='" + validateUserId + '\'' +
+                ", validateUserId='" + createdTime + '\'' +
                 ", name='" + name + '\'' +
                 ", userName='" + userName + '\'' +
                 ", gender=" + gender +

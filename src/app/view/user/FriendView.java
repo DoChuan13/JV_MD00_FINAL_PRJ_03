@@ -450,9 +450,9 @@ public class FriendView {
                 String confirm = InputConfig.getString();
                 if (confirm.equalsIgnoreCase("Y")) {
                     friendController.deleteFriend(friend);
+                    resetTempValue();
                     FriendUI.showMenuFindNewFriend(option, searchUserResult, friendList, loginUser);
                     System.out.print(MenuConst.REMOVE_FRIEND_STATUS_SUCCESS);
-                    resetTempValue();
                     InputConfig.pressAnyKey();
                     manageViewFriendPage();
                 } else manageAddNewFriend();
@@ -470,9 +470,9 @@ public class FriendView {
                 String confirm = InputConfig.getString();
                 if (confirm.equalsIgnoreCase("Y")) {
                     friendController.deleteFriend(friend);
+                    resetTempValue();
                     FriendUI.showMenuFindNewFriend(option, searchUserResult, friendList, loginUser);
                     System.out.print(MenuConst.REMOVE_FRIEND_REQUEST_SUCCESS);
-                    resetTempValue();
                     InputConfig.pressAnyKey();
                     manageViewFriendPage();
                 } else manageAddNewFriend();

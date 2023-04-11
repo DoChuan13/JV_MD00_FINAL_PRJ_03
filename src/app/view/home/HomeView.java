@@ -10,6 +10,7 @@ import app.model.Like;
 import app.model.Post;
 import app.model.User;
 import app.view.main.MainView;
+import app.view.post.PostView;
 import app.view.user.UserView;
 
 import java.util.List;
@@ -74,6 +75,9 @@ public class HomeView {
             System.out.print(MenuConst.SELECT_OPTION);
             option = InputConfig.getInteger();
             switch (option) {
+                case 4:
+                    showLikedUserList(detailPost);
+                    break;
                 case 5:
                     likeUnlikePost(detailPost);
                     break;
@@ -123,7 +127,7 @@ public class HomeView {
         boolean existLike = false;
         for (Like like : detailPost.getLikeList()) {
             if (like.getLikedUser().getUserId() == loginUser.getUserId() &&
-                    like.getLikedUser().getValidateUserId().equals(loginUser.getValidateUserId())) {
+                    like.getLikedUser().getCreatedTime() == loginUser.getCreatedTime()) {
                 existLike = true;
                 break;
             }
@@ -318,6 +322,10 @@ public class HomeView {
             }
         }
         return null;
+    }
+
+    private void showLikedUserList(Post detailPost) {
+        new PostView().showLikedUserList(detailPost);
     }
 
     /*========================================View Home Page End========================================*/

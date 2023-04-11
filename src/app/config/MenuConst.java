@@ -104,6 +104,16 @@ public final class MenuConst {
     public static final String FRIEND_REQUEST_ALERT = ColorConfig.ERROR_COLOR + "You have a Friend Request from this user!!! Are you want to Confirm? (Y/N)....: " + ColorConfig.RESET;
     public static final String FRIEND_REQUEST_CONFIRM = ColorConfig.ERROR_COLOR + "Are you sure to send add friend request? (Y/N)....: " + ColorConfig.RESET;
     public static final String DENY_PERMISSION_CHAT = ColorConfig.ERROR_COLOR + "You can't continue chat with Account that is not User Role!!! Press any key to continue.... " + ColorConfig.RESET;
+    public static final String HAVE_NO_RESULT = ColorConfig.ERROR_COLOR + "You have no any Result" + ColorConfig.RESET;
+    public static final String HAVE_NO_CHAT_CONTENT = ColorConfig.ERROR_COLOR + "You have no any Chat Content" + ColorConfig.RESET;
+    public static final String HAVE_NO_POST_HOME = ColorConfig.ERROR_COLOR + "You have no any Post for you in Home Page" + ColorConfig.RESET;
+    public static final String HAVE_NO_POST = ColorConfig.ERROR_COLOR + "You have no any Post" + ColorConfig.RESET;
+    public static final String HAVE_NO_FRIEND = ColorConfig.ERROR_COLOR + "You have no any Friend" + ColorConfig.RESET;
+    public static final String HAVE_NO_CHAT = ColorConfig.ERROR_COLOR + "You have no any Chat" + ColorConfig.RESET;
+    public static final String HAVE_NO_FRIEND_REQUEST = ColorConfig.ERROR_COLOR + "You have no any Friend Request" + ColorConfig.RESET;
+    public static final String HAVE_NO_SENT_REQUEST = ColorConfig.ERROR_COLOR + "You have no any Sent Request" + ColorConfig.RESET;
+    public static final String HAVE_NO_LIKE_IN_POST = ColorConfig.ERROR_COLOR + "You have no any Like in this Post" + ColorConfig.RESET;
+
     /*==========================================================================Menu==========================================================================*/
     public static final String BREAK_LINE = ColorConfig.BORDER_COLOR + "✧----------------------------------------------------------------------------------------✧" + ColorConfig.RESET;
     public static final String BLANK_LINE = ColorConfig.BORDER_COLOR + "|                                                                                        |" + ColorConfig.RESET;
@@ -175,6 +185,7 @@ public final class MenuConst {
     /*==========================================================================Menu Config==========================================================================*/
     private static final int MAX_WIDTH = 83;
     public static final String WIDTH_1_COL = "%-" + MAX_WIDTH + "s";//%-83s"
+    public static final String WIDTH_NO_CONTENT = "%-" + (MAX_WIDTH + 11) + "s";//%-83s"
     private static final int MENU_WIDTH = 30;
     private static final int ONE_CONTENT = MAX_WIDTH - MENU_WIDTH;
     public static final String WIDTH_2_COL = "%-" + MENU_WIDTH + "s" + "%-" + ONE_CONTENT + "s";//%-30s%-53s"

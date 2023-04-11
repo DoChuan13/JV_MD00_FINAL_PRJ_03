@@ -29,7 +29,7 @@ public final class ChatUI {
         BreakConfig.clearScreen();
         System.out.println(MenuConst.HEADER_CHAT_PAGE);
         if (userList.size() == 0) {
-            System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  => " + MenuConst.WIDTH_1_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "You have no any Result");
+            System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  => " + MenuConst.WIDTH_NO_CONTENT + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, MenuConst.HAVE_NO_RESULT);
         } else {
             System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  => " + MenuConst.WIDTH_2_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, friendIdTitle, friendNameViewTitle);
         }
@@ -49,7 +49,7 @@ public final class ChatUI {
         BreakConfig.clearScreen();
         System.out.println(MenuConst.HEADER_CHAT_DETAIL);
         if (currentChat.getChatContent().size() == 0) {
-            System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  => " + MenuConst.WIDTH_1_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "You have no any Chat Content");
+            System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  => " + MenuConst.WIDTH_NO_CONTENT + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, MenuConst.HAVE_NO_CHAT_CONTENT);
             System.out.println(MenuConst.BLANK_LINE);
         } else {
             long timeIn;
@@ -100,7 +100,7 @@ public final class ChatUI {
         BreakConfig.clearScreen();
         System.out.println(MenuConst.HEADER_CHAT_LIST);
         if (chatList.size() == 0) {
-            System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "     " + MenuConst.WIDTH_1_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "You have no any Chat");
+            System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  => " + MenuConst.WIDTH_NO_CONTENT + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, MenuConst.HAVE_NO_CHAT);
             System.out.println(MenuConst.BLANK_LINE);
         } else {
             for (Chat chat : chatList) {

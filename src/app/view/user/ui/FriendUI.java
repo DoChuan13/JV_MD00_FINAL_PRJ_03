@@ -42,7 +42,7 @@ public final class FriendUI {
 
     private static void showAllFriend(List<Friend> acceptedFriends, User currentUser) {
         if (acceptedFriends.size() == 0) {
-            System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  => " + MenuConst.WIDTH_1_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "You have no any Friend");
+            System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  => " + MenuConst.WIDTH_NO_CONTENT + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, MenuConst.HAVE_NO_FRIEND);
         } else {
             String friendName;
             String friendIdTitle = "Friend Id: ";
@@ -131,7 +131,7 @@ public final class FriendUI {
         BreakConfig.clearScreen();
         System.out.println(MenuConst.HEADER_FRIEND_REQUEST);
         if (pendingRequestFriends.size() == 0) {
-            System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  => " + MenuConst.WIDTH_1_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "You have no any Friend Request");
+            System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  => " + MenuConst.WIDTH_NO_CONTENT + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, MenuConst.HAVE_NO_FRIEND_REQUEST);
             System.out.println(MenuConst.BLANK_LINE);
         } else {
             for (Friend friend : pendingRequestFriends) {
@@ -159,7 +159,7 @@ public final class FriendUI {
         BreakConfig.clearScreen();
         System.out.println(MenuConst.HEADER_SENT_REQUEST);
         if (sentRequestList.size() == 0) {
-            System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  => " + MenuConst.WIDTH_1_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "You have no any Sent Request");
+            System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  => " + MenuConst.WIDTH_NO_CONTENT + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, MenuConst.HAVE_NO_SENT_REQUEST);
             System.out.println(MenuConst.BLANK_LINE);
         } else {
             for (Friend friend : sentRequestList) {

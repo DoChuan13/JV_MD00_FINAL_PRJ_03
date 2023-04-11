@@ -15,7 +15,7 @@ public class HomeUI {
         System.out.println(MenuConst.HEADER_HOME);
         //Show all post here
         if (postList.size() == 0) {
-            System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.INACTIVE_COLOR + "  => " + MenuConst.WIDTH_1_COL + ColorConfig.RESET + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "You have no any Post for you in Home Page");
+            System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.INACTIVE_COLOR + "  => " + MenuConst.WIDTH_NO_CONTENT + ColorConfig.RESET + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, MenuConst.HAVE_NO_POST);
         } else {
             for (Post post : postList) {
                 showAllPost(post);

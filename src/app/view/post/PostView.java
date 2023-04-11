@@ -156,6 +156,9 @@ public class PostView {
             System.out.print(MenuConst.SELECT_OPTION);
             option = InputConfig.getInteger();
             switch (option) {
+                case 4:
+                    showLikedUserList(detailPost);
+                    break;
                 case 5:
                     likeUnlikePost(detailPost);
                     break;
@@ -186,18 +189,40 @@ public class PostView {
         }
     }
 
+    public void showLikedUserList(Post detailPost) {
+        PostUI.showMenuLikedUserList(detailPost);
+        System.out.print(MenuConst.SELECT_OPTION);
+        int option = InputConfig.getInteger();
+        switch (option) {
+            case 9:
+                resetTempValue();
+                showPostDetail(detailPost);
+                break;
+            case 10:
+                new MainView().logout();
+                break;
+            case 0:
+                MainView.exitApplication();
+            default:
+                PostUI.showMenuLikedUserList(detailPost);
+                MainView.showInvalidOption();
+                InputConfig.pressAnyKey();
+                showLikedUserList(detailPost);
+        }
+
+    }
+
     private void writeNewComment(Post detailPost) {
         int option = 0;
         PostUI.showMenuWriteNewComment(option, detailPost, comment, loginUser);
         System.out.print(MenuConst.SELECT_OPTION);
         option = InputConfig.getInteger();
         switch (option) {
+            case 7:
+                getNewComment(detailPost, option);
+                break;
             case 8:
-                if (comment.length() == 0) {
-                    getNewComment(detailPost, option);
-                } else {
-                    checkNewComment(detailPost, option);
-                }
+                checkNewComment(detailPost, option);
                 break;
             case 9:
                 resetTempValue();
@@ -228,6 +253,7 @@ public class PostView {
             Comment newComment = new Comment(id, loginUser, comment);
             postController.createNewComment(detailPost, newComment);
             System.out.print(MenuConst.COMMENT_SUCCESS);
+            InputConfig.pressAnyKey();
             showAllPost();
         }
     }
@@ -288,7 +314,7 @@ public class PostView {
         boolean existLike = false;
         for (Like like : detailPost.getLikeList()) {
             if (like.getLikedUser().getUserId() == loginUser.getUserId() &&
-                    like.getLikedUser().getValidateUserId().equals(loginUser.getValidateUserId())) {
+                    like.getLikedUser().getCreatedTime() == loginUser.getCreatedTime()) {
                 existLike = true;
                 break;
             }

@@ -42,7 +42,7 @@ public final class PostUI {
         BreakConfig.clearScreen();
         System.out.println(MenuConst.HEADER_ALL_POST);
         if (postList.size() == 0) {
-            System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  => " + MenuConst.WIDTH_1_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "You have no any Post");
+            System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  => " + MenuConst.WIDTH_NO_CONTENT + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, MenuConst.HAVE_NO_POST_HOME);
         } else {
             for (Post post : postList) {
                 showPostInfo(post);
@@ -59,8 +59,7 @@ public final class PostUI {
     public static void showMenuPostDetail(Post detailPost, User loginUser) {
         boolean existLike = false;
         for (Like like : detailPost.getLikeList()) {
-            if (like.getLikedUser().getUserId() == loginUser.getUserId() &&
-                    like.getLikedUser().getValidateUserId().equals(loginUser.getValidateUserId())) {
+            if (like.getLikedUser().getUserId() == loginUser.getUserId() && like.getLikedUser().getCreatedTime() == loginUser.getCreatedTime()) {
                 existLike = true;
                 break;
             }
@@ -72,6 +71,7 @@ public final class PostUI {
         showPostInfo(detailPost);
         showCommentDetail(detailPost);
         System.out.println(MenuConst.BREAK_LINE);
+        System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.ACTION_COLOR + "  4. " + MenuConst.WIDTH_1_COL + ColorConfig.RESET + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "Show Liked List");
         System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.ACTION_COLOR + "  5. " + MenuConst.WIDTH_1_COL + ColorConfig.RESET + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, (existLike ? "Unlike Post" : "Like Post"));
         System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.ACTION_COLOR + "  6. " + MenuConst.WIDTH_1_COL + ColorConfig.RESET + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "New Comment");
         if (loginUser.getUserId() == detailPost.getOwnUser().getUserId()) {
@@ -93,12 +93,10 @@ public final class PostUI {
         System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + (option == 7 ? ColorConfig.ACTIVE_COLOR : ColorConfig.INACTIVE_COLOR) + "  => " + MenuConst.WIDTH_1_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "Comment");
         breakLineContent(option, (byte) 7, newComment);
         System.out.println(MenuConst.BREAK_LINE);
-        if (newComment.length() == 0) {
-            System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.ACTION_COLOR + "  8. " + MenuConst.WIDTH_1_COL + ColorConfig.RESET + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "Write Comment");
 
-        } else {
-            System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.ACTION_COLOR + "  8. " + MenuConst.WIDTH_1_COL + ColorConfig.RESET + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "Post Comment");
-        }
+        System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.ACTION_COLOR + "  7. " + MenuConst.WIDTH_1_COL + ColorConfig.RESET + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "Write Comment");
+        System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.ACTION_COLOR + "  8. " + MenuConst.WIDTH_1_COL + ColorConfig.RESET + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, "Post Comment");
+
         System.out.println(MenuConst.BREAK_LINE);
         System.out.println(MenuConst.SYS_CTR_FUL_123);
         System.out.println(MenuConst.FOOTER);
@@ -181,12 +179,42 @@ public final class PostUI {
 
     private static void showAllComment(Comment comment, User commentUser) {
         String commentUserView = "User: " + comment.getCommentUser().getName();
-        String userStatusView = "Status: " + ((commentUser == null) ? "Unavailable" : (!commentUser.getValidateUserId().equals(comment.getCommentUser().getValidateUserId()) ? "Unavailable" : "Active"));
-        String userIdView = "User Id: " + ((commentUser == null) ? "Unknown" : (!commentUser.getValidateUserId().equals(comment.getCommentUser().getValidateUserId()) ? "Unknown" : comment.getCommentUser().getUserId()));
+        String userStatusView = "Status: " + ((commentUser == null) ? "Unavailable" : (commentUser.getCreatedTime() != comment.getCommentUser().getCreatedTime() ? "Unavailable" : "Active"));
+        String userIdView = "User Id: " + ((commentUser == null) ? "Unknown" : (commentUser.getCreatedTime() != (comment.getCommentUser().getCreatedTime()) ? "Unknown" : comment.getCommentUser().getUserId()));
         //String commentContentView = "(Content)";
         System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  => " + MenuConst.WIDTH_3_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, commentUserView, userStatusView, userIdView);
         //System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  => " + MenuConst.WIDTH_1_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, commentContentView);
         breakLineContent((byte) 0, (byte) 1, comment.getComment());
         System.out.println(MenuConst.BLANK_LINE);
+    }
+
+    public static void showMenuLikedUserList(Post post) {
+        BreakConfig.clearScreen();
+        System.out.println(MenuConst.HEADER_UPDATE_POST_DETAIL);
+
+        String commentUserTitle = "User: ";
+        String userStatusTitle = "Status: ";
+        String userIdTitle = "User Id: ";
+        System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  => " + MenuConst.WIDTH_3_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, commentUserTitle, userStatusTitle, userIdTitle);
+        if (post.getCommentList().size() == 0) {
+            System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  => " + MenuConst.WIDTH_NO_CONTENT + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, MenuConst.HAVE_NO_LIKE_IN_POST);
+            System.out.println(MenuConst.BLANK_LINE);
+        } else {
+            for (Comment comment : post.getCommentList()) {
+                User commentUser = new UserController().findUserById(comment.getCommentUser().getUserId());
+                showAllLiked(comment, commentUser);
+            }
+            System.out.println(MenuConst.BLANK_LINE);
+        }
+        System.out.println(MenuConst.BREAK_LINE);
+        System.out.println(MenuConst.SYS_CTR_FUL_123);
+        System.out.println(MenuConst.FOOTER);
+    }
+
+    public static void showAllLiked(Comment comment, User commentUser) {
+        String commentUserView = comment.getCommentUser().getName();
+        String userStatusView = ((commentUser == null) ? "Unavailable" : (commentUser.getCreatedTime() != comment.getCommentUser().getCreatedTime() ? "Unavailable" : "Active"));
+        String userIdView = String.valueOf((commentUser == null) ? "Unknown" : (commentUser.getCreatedTime() != (comment.getCommentUser().getCreatedTime()) ? "Unknown" : comment.getCommentUser().getUserId()));
+        System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "     " + MenuConst.WIDTH_3_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, commentUserView, userStatusView, userIdView);
     }
 }
