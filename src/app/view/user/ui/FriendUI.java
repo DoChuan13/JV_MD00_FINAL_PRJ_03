@@ -94,7 +94,7 @@ public final class FriendUI {
             String statusTitle = "Status: ";
             System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  => " + MenuConst.WIDTH_3_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, userIdTitle, nameTitle, statusTitle);
             for (User searchUser : searchUserResult) {
-                String status = "";
+                String status = "Un Friend";
                 for (Friend friend : friendList) {
                     status = "";
                     if (friend.getFriend1().getUserId() == searchUser.getUserId() || friend.getFriend2().getUserId() == searchUser.getUserId()) {

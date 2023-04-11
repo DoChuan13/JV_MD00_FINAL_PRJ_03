@@ -371,6 +371,7 @@ public class FriendView {
                 newFriend = rejectedFriend;
             }
             friendController.sentFriendRequest(newFriend);
+            friendList = friendController.getListAllFriend(loginUser);
             FriendUI.showMenuFindNewFriend(option, searchUserResult, friendList, loginUser);
             System.out.print(MenuConst.SEND_FRIEND_REQUEST_SUCCESS);
             resetTempValue();
@@ -399,9 +400,10 @@ public class FriendView {
                             String confirm = InputConfig.getString();
                             if (confirm.equalsIgnoreCase("Y")) {
                                 friend.setStatus(MenuConst.FRIEND_ACCEPTED);
-                                resetTempValue();
+                                friendList = friendController.getListAllFriend(loginUser);
                                 FriendUI.showMenuFindNewFriend(option, searchUserResult, friendList, loginUser);
                                 System.out.print(MenuConst.ACCEPT_SUCCESS);
+                                resetTempValue();
                                 InputConfig.pressAnyKey();
                                 break;
                             }
@@ -413,9 +415,10 @@ public class FriendView {
                             FriendUI.showMenuFindNewFriend(option, searchUserResult, friendList, loginUser);
                             if (confirm.equalsIgnoreCase("Y")) {
                                 friend.setStatus(MenuConst.FRIEND_REJECT);
-                                resetTempValue();
+                                friendList = friendController.getListAllFriend(loginUser);
                                 FriendUI.showMenuFindNewFriend(option, searchUserResult, friendList, loginUser);
                                 System.out.print(MenuConst.REJECT_SUCCESS);
+                                resetTempValue();
                                 InputConfig.pressAnyKey();
                                 break;
                             }
@@ -450,8 +453,9 @@ public class FriendView {
                 String confirm = InputConfig.getString();
                 if (confirm.equalsIgnoreCase("Y")) {
                     friendController.deleteFriend(friend);
-                    resetTempValue();
+                    friendList = friendController.getListAllFriend(loginUser);
                     FriendUI.showMenuFindNewFriend(option, searchUserResult, friendList, loginUser);
+                    resetTempValue();
                     System.out.print(MenuConst.REMOVE_FRIEND_STATUS_SUCCESS);
                     InputConfig.pressAnyKey();
                     manageViewFriendPage();
@@ -470,9 +474,10 @@ public class FriendView {
                 String confirm = InputConfig.getString();
                 if (confirm.equalsIgnoreCase("Y")) {
                     friendController.deleteFriend(friend);
-                    resetTempValue();
+                    friendList = friendController.getListAllFriend(loginUser);
                     FriendUI.showMenuFindNewFriend(option, searchUserResult, friendList, loginUser);
                     System.out.print(MenuConst.REMOVE_FRIEND_REQUEST_SUCCESS);
+                    resetTempValue();
                     InputConfig.pressAnyKey();
                     manageViewFriendPage();
                 } else manageAddNewFriend();
