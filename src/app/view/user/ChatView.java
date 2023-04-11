@@ -6,10 +6,12 @@ import app.controller.ChatController;
 import app.controller.UserController;
 import app.model.Chat;
 import app.model.ChatDetail;
+import app.model.RoleName;
 import app.model.User;
 import app.view.main.MainView;
 import app.view.user.ui.ChatUI;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -124,6 +126,7 @@ public class ChatView {
             case 7:
                 if (checkAbilityDeleteChat(startChat, loginUser) == 0) {
                     ChatUI.showMenuChatList(chatList);
+                    System.out.print(MenuConst.CANT_DELETE_EMPTY_CHAT);
                     MainView.showInvalidOption();
                     InputConfig.pressAnyKey();
                     sentChatDetail(startChat);
@@ -132,10 +135,19 @@ public class ChatView {
                 }
                 break;
             case 8:
-                if (chatSession.getContent().length() == 0) {
-                    writeNewChat(option, startChat);
+                RoleName roleUser1 = new ArrayList<>(startChat.getStartUser().getRole()).get(0).getName();
+                RoleName roleUser2 = new ArrayList<>(startChat.getTargetUser().getRole()).get(0).getName();
+                if (roleUser1 != RoleName.USER || roleUser2 != RoleName.USER) {
+                    ChatUI.showMenuChatDetail(option, startChat, chatSession, loginUser);
+                    System.out.print(MenuConst.DENY_PERMISSION_CHAT);
+                    InputConfig.pressAnyKey();
+                    sentChatDetail(startChat);
                 } else {
-                    sentChat(option, startChat, loginUser);
+                    if (chatSession.getContent().length() == 0) {
+                        writeNewChat(option, startChat);
+                    } else {
+                        sentChat(option, startChat, loginUser);
+                    }
                 }
                 break;
             case 9:

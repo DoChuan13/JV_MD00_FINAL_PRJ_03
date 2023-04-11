@@ -62,6 +62,7 @@ public final class MenuConst {
     public static final String INPUT_COMMENT = "Input Comment: ";
     public static final String INPUT_CHAT = "Input Chat: ";
     public static final String CHANGE_FRIEND_STATUS = "Input Friend Action: ";
+    public static final String CANT_DELETE_EMPTY_CHAT = ColorConfig.OPTION_COLOR + "You can't delete Empty Chat Box... " + ColorConfig.RESET;
     public static final String DIRECT_TO_DETAIL = ColorConfig.OPTION_COLOR + "Please any key to continue... " + ColorConfig.RESET;
     public static final String COMMENT_SUCCESS = ColorConfig.OPTION_COLOR + "Create New Comment Successfully!!! Please any key to continue... " + ColorConfig.RESET;
     public static final String LOGIN_SUCCESS = ColorConfig.OPTION_COLOR + "Login Successfully!!!" + ColorConfig.RESET;
@@ -102,6 +103,7 @@ public final class MenuConst {
     public static final String FRIEND_ALREADY_ALERT = ColorConfig.ERROR_COLOR + "This user is already Friend to you!!! Are you want to Un-Friend? (Y/N)....: " + ColorConfig.RESET;
     public static final String FRIEND_REQUEST_ALERT = ColorConfig.ERROR_COLOR + "You have a Friend Request from this user!!! Are you want to Confirm? (Y/N)....: " + ColorConfig.RESET;
     public static final String FRIEND_REQUEST_CONFIRM = ColorConfig.ERROR_COLOR + "Are you sure to send add friend request? (Y/N)....: " + ColorConfig.RESET;
+    public static final String DENY_PERMISSION_CHAT = ColorConfig.ERROR_COLOR + "You can't continue chat with Account that is not User Role!!! Press any key to continue.... " + ColorConfig.RESET;
     /*==========================================================================Menu==========================================================================*/
     public static final String BREAK_LINE = ColorConfig.BORDER_COLOR + "✧----------------------------------------------------------------------------------------✧" + ColorConfig.RESET;
     public static final String BLANK_LINE = ColorConfig.BORDER_COLOR + "|                                                                                        |" + ColorConfig.RESET;

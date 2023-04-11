@@ -10,6 +10,10 @@ import java.util.List;
 public class ChatController {
     private final IChatService chatService = new ChatServiceIPLM();
 
+    public List<Chat> getAllChatList() {
+        return chatService.findAll();
+    }
+
     public void synchronizedUserInChat(User user) {
         chatService.synchronizedUserInChat(user);
     }
