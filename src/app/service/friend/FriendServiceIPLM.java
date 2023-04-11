@@ -98,7 +98,7 @@ public class FriendServiceIPLM implements IFriendService, IDataBaseService<Frien
         List<Friend> friendsResult = new LinkedList<>();
         for (Friend friend : friendList) {
             if (friend.getFriend2().getUserId() == loginUser.getUserId()) {
-                if (!friend.getStatus().equalsIgnoreCase(MenuConst.FRIEND_ACCEPTED)) {
+                if (friend.getStatus().equalsIgnoreCase(MenuConst.FRIEND_PENDING)) {
                     friendsResult.add(friend);
                 }
             }

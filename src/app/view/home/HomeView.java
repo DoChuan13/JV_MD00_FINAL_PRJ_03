@@ -18,8 +18,8 @@ import java.util.List;
 public class HomeView {
     private static final UserController userController = new UserController();
     private static final PostController postController = new PostController();
-    private static User loginUser = userController.getLoginUser();
-    private static List<Post> postList = postController.getPostListForUser(loginUser);
+    private User loginUser = userController.getLoginUser();
+    private List<Post> postList = postController.getPostListForUser(loginUser);
 
     /*========================================View Home Page Start========================================*/
     private String comment = "";

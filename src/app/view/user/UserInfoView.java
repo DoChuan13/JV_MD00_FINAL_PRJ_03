@@ -18,10 +18,10 @@ public class UserInfoView {
     private static final FriendController friendController = new FriendController();
     private static final PostController postController = new PostController();
     private static final ChatController chatController = new ChatController();
-    private static User loginUser = userController.getLoginUser();
-    private static long updatedEmailTime = loginUser.getEmailUpdatedTime().getTime();
-    private static long updatedUserNameTime = loginUser.getUserUpdatedTime().getTime();
-    private static String password = "", newPassword = "", rePassword = "";
+    private User loginUser = userController.getLoginUser();
+    private long updatedEmailTime = loginUser.getEmailUpdatedTime().getTime();
+    private long updatedUserNameTime = loginUser.getUserUpdatedTime().getTime();
+    private String password = "", newPassword = "", rePassword = "";
 
     public UserInfoView() {
     }

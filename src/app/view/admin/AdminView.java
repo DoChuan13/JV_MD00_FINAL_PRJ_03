@@ -19,9 +19,9 @@ public class AdminView {
     private static final PostController postController = new PostController();
     private static final ChatController chatController = new ChatController();
     private static final RoleController roleController = new RoleController();
-    private static User loginUser = userController.getLoginUser();
-    private static List<User> userList = userController.getUserList();
-    private static String password = "", newPassword = "", rePassword = "";
+    private User loginUser = userController.getLoginUser();
+    private List<User> userList = userController.getUserList();
+    private String password = "", newPassword = "", rePassword = "";
 
     public AdminView() {
     }

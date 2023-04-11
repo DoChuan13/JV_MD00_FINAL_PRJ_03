@@ -101,7 +101,7 @@ public final class FriendUI {
                         if (friend.getStatus().equals(MenuConst.FRIEND_ACCEPTED)) {
                             status += "Friend";
                             break;
-                        } else if (friend.getFriend1().getUserId() == loginUser.getUserId() && friend.getStatus().equals(MenuConst.FRIEND_PENDING)) {
+                        } else if (friend.getFriend1().getUserId() == loginUser.getUserId() && !friend.getStatus().equals(MenuConst.FRIEND_ACCEPTED)) {
                             status += "Sent Request";
                             break;
                         } else if (friend.getFriend2().getUserId() == loginUser.getUserId() && friend.getStatus().equals(MenuConst.FRIEND_PENDING)) {

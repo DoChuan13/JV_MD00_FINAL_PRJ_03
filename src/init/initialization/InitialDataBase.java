@@ -21,13 +21,13 @@ public class InitialDataBase {
     private static final ChatController chatController = new ChatController();
     private static final RoleController roleController = new RoleController();
     //Role......
-    private static final List<User> userList = userService.findAll();
-    private static final List<Friend> friendList = friendService.findAll();
-    private static final List<Post> postList = postService.findAll();
-    private static final List<Chat> chatList = chatController.getAllChatList();
-    private static final Set<Role> adminRole = roleController.createNewRoleGroup(RoleName.ADMIN);
-    private static final Set<Role> pmRole = roleController.createNewRoleGroup(RoleName.PM);
-    private static final Set<Role> userRole = roleController.createNewRoleGroup(RoleName.USER);
+    private final List<User> userList = userService.findAll();
+    private final List<Friend> friendList = friendService.findAll();
+    private final List<Post> postList = postService.findAll();
+    private final List<Chat> chatList = chatController.getAllChatList();
+    private final Set<Role> adminRole = roleController.createNewRoleGroup(RoleName.ADMIN);
+    private final Set<Role> pmRole = roleController.createNewRoleGroup(RoleName.PM);
+    private final Set<Role> userRole = roleController.createNewRoleGroup(RoleName.USER);
 
     //Friend
     private User doChuan, minhThu, ducVuong, haiYen, manhSon, huuHuy, ducDat, dinhHong;

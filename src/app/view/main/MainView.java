@@ -19,9 +19,9 @@ import java.util.Set;
 
 public class MainView {
     private static final UserController userController = new UserController();
-    private static User loginUser = userController.getLoginUser();
-    private static User tempUser = new User();
-    private static String userName = "", password = "", rePassword = "";
+    private User loginUser = userController.getLoginUser();
+    private User tempUser = new User();
+    private String userName = "", password = "", rePassword = "";
 
     public static void exitApplication() {
         MainUI.showAlertExitApp();

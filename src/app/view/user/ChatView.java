@@ -19,11 +19,11 @@ import java.util.List;
 public class ChatView {
     private static final UserController userController = new UserController();
     private static final ChatController chatController = new ChatController();
-    private static User loginUser = userController.getLoginUser();
-    private static List<Chat> chatList = chatController.findAllChatByUser(loginUser);
-    private static ChatDetail chatSession = new ChatDetail(1, "", loginUser);
-    private static List<User> searchUserResult = new LinkedList<>();
-    private static String findName = "", chatContent = "";
+    private User loginUser = userController.getLoginUser();
+    private List<Chat> chatList = chatController.findAllChatByUser(loginUser);
+    private ChatDetail chatSession = new ChatDetail(1, "", loginUser);
+    private List<User> searchUserResult = new LinkedList<>();
+    private String findName = "", chatContent = "";
 
     /*========================================View Chat Page Start========================================*/
     public void viewChatPage() {

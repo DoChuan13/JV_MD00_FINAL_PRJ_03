@@ -17,10 +17,10 @@ import java.util.List;
 public class PostView {
     private static final PostController postController = new PostController();
     private static final UserController userController = new UserController();
-    private static final User loginUser = userController.getLoginUser();
-    private static List<Post> postList = postController.getPostList();
-    private static String postContent = "", postStatus = "";
-    private static String comment = "";
+    private final User loginUser = userController.getLoginUser();
+    private List<Post> postList = postController.getPostList();
+    private String postContent = "", postStatus = "";
+    private String comment = "";
 
     /*========================================View Post Page Start========================================*/
     public void viewPostPage() {
