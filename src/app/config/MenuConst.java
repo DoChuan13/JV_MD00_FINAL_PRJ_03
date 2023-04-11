@@ -119,10 +119,10 @@ public final class MenuConst {
     public static final String BLANK_LINE = ColorConfig.BORDER_COLOR + "|                                                                                        |" + ColorConfig.RESET;
     //Detail Menu
     public static final String WELCOME_TITLE = ColorConfig.BORDER_COLOR + "|                            WELCOME FACEBOOK FAKE Mark Zuckerberg                       |" + ColorConfig.RESET;
-    public static final String SYS_CTR_FUL_123 = ColorConfig.BORDER_COLOR + "|" + ColorConfig.END_COLOR + "  0. Exit                          " + ColorConfig.BACK_COLOR + "9. Back                       " + ColorConfig.END_COLOR + "10. Log Out            " + ColorConfig.BORDER_COLOR + "|" + ColorConfig.RESET;
-    public static final String SYS_CTR_MID_12 = ColorConfig.BORDER_COLOR + "|" + ColorConfig.END_COLOR + "  0. Exit                          " + ColorConfig.BACK_COLOR + "9. Back                       " + ColorConfig.END_COLOR + "                       " + ColorConfig.BORDER_COLOR + "|" + ColorConfig.RESET;
-    public static final String SYS_CTR_LES_1 = ColorConfig.BORDER_COLOR + "|" + ColorConfig.END_COLOR + "  0. Exit                          " + ColorConfig.BACK_COLOR + "                              " + ColorConfig.END_COLOR + "                       " + ColorConfig.BORDER_COLOR + "|" + ColorConfig.RESET;
-    public static final String SYS_CTR_MID_13 = ColorConfig.BORDER_COLOR + "|" + ColorConfig.END_COLOR + "  0. Exit                          " + ColorConfig.BACK_COLOR + "                              " + ColorConfig.END_COLOR + "10. Log Out            " + ColorConfig.BORDER_COLOR + "|" + ColorConfig.RESET;
+    public static final String SYS_CTR_FUL_123 = ColorConfig.BORDER_COLOR + "|" + ColorConfig.EXIT_COLOR + "  0. Exit                          " + ColorConfig.BACK_COLOR + "9. Back                       " + ColorConfig.OUT_COLOR + "10. Log Out            " + ColorConfig.BORDER_COLOR + "|" + ColorConfig.RESET;
+    public static final String SYS_CTR_MID_12 = ColorConfig.BORDER_COLOR + "|" + ColorConfig.EXIT_COLOR + "  0. Exit                          " + ColorConfig.BACK_COLOR + "9. Back                       " + ColorConfig.OUT_COLOR + "                       " + ColorConfig.BORDER_COLOR + "|" + ColorConfig.RESET;
+    public static final String SYS_CTR_LES_1 = ColorConfig.BORDER_COLOR + "|" + ColorConfig.EXIT_COLOR + "  0. Exit                          " + ColorConfig.BACK_COLOR + "                              " + ColorConfig.OUT_COLOR + "                       " + ColorConfig.BORDER_COLOR + "|" + ColorConfig.RESET;
+    public static final String SYS_CTR_MID_13 = ColorConfig.BORDER_COLOR + "|" + ColorConfig.EXIT_COLOR + "  0. Exit                          " + ColorConfig.BACK_COLOR + "                              " + ColorConfig.OUT_COLOR + "10. Log Out            " + ColorConfig.BORDER_COLOR + "|" + ColorConfig.RESET;
     public static final String WIDTH_5_COL_ACC_LIST = "%-7s" + "%-30s" + "%-30s" + "%-10s" + "%-10s";
     public static final String POST_PUBLIC = "Public";
     public static final String POST_FRIEND = "Friend";
@@ -151,6 +151,8 @@ public final class MenuConst {
     public static final String HEADER_ADD_FRIEND = BREAK_LINE + "\n" + ADD_FRIEND_TITLE + "\n" + BREAK_LINE;
     private static final String UPDATE_POST_DETAIL_TITLE = ColorConfig.BORDER_COLOR + "|                                       UPDATE POST                                      |" + ColorConfig.RESET;
     public static final String HEADER_UPDATE_POST_DETAIL = BREAK_LINE + "\n" + UPDATE_POST_DETAIL_TITLE + "\n" + BREAK_LINE;
+    private static final String LIKE_POST_TITLE = ColorConfig.BORDER_COLOR + "|                                         LIKE POST                                      |" + ColorConfig.RESET;
+    public static final String HEADER_VIEW_LIKE_POST = BREAK_LINE + "\n" + LIKE_POST_TITLE + "\n" + BREAK_LINE;
     private static final String POST_DETAIL_TITLE = ColorConfig.BORDER_COLOR + "|                                       POST DETAIL                                      |" + ColorConfig.RESET;
     public static final String HEADER_POST_DETAIL = BREAK_LINE + "\n" + POST_DETAIL_TITLE + "\n" + BREAK_LINE;
     private static final String TITLE_FRIEND_LIST = ColorConfig.BORDER_COLOR + "|                                      FRIEND LIST                                       |" + ColorConfig.RESET;

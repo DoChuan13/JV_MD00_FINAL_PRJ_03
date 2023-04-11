@@ -100,7 +100,7 @@ public final class ColorConfig {
     // High Intensity
     private static final String RED_BRIGHT = "\033[0;91m";    // RED
     public static final String BLOCKED_STATUS = RED_BRIGHT;
-    public static final String END_COLOR = RED_BRIGHT;
+    public static final String EXIT_COLOR = RED_BRIGHT;
     public static final String ERROR_COLOR = RED_BRIGHT;
     private static final String GREEN_BRIGHT = "\033[0;92m";  // GREEN
     public static final String ACTIVE_STATUS = GREEN_BRIGHT;
@@ -109,6 +109,7 @@ public final class ColorConfig {
     private static final String BLUE_BRIGHT = "\033[0;94m";   // BLUE
     public static final String ACTION_COLOR = BLUE_BRIGHT;
     private static final String PURPLE_BRIGHT = "\033[0;95m"; // PURPLE
+    public static final String OUT_COLOR = PURPLE_BRIGHT;
     private static final String CYAN_BRIGHT = "\033[0;96m";   // CYAN
     private static final String WHITE_BRIGHT = "\033[0;97m";  // WHITE
     public static final String OPTION_COLOR = WHITE_BRIGHT;

@@ -190,7 +190,7 @@ public final class PostUI {
 
     public static void showMenuLikedUserList(Post post) {
         BreakConfig.clearScreen();
-        System.out.println(MenuConst.HEADER_UPDATE_POST_DETAIL);
+        System.out.println(MenuConst.HEADER_VIEW_LIKE_POST);
 
         String commentUserTitle = "User: ";
         String userStatusTitle = "Status: ";
