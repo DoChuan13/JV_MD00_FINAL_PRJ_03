@@ -13,7 +13,9 @@ import app.service.role.RoleServiceIPLM;
 import app.service.user.UserServiceIPML;
 import init.DataBase;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class UserController {
     private final UserServiceIPML userService = new UserServiceIPML();
@@ -75,24 +77,7 @@ public class UserController {
     }
 
     public boolean checkValidateExistAccount(User currentUser) {
-        List<User> userList = getUserList();
-        for (int i = 0; i < userList.size(); i++) {
-            if (userList.get(i).getUserId() != currentUser.getUserId()) {
-                if (userList.get(i).getUserName().equalsIgnoreCase(currentUser.getUserName())) {
-                    System.out.print(MenuConst.EXIST_USER_ACCOUNT);
-                    return true;
-                }
-                if (getUserList().get(i).getEmail().equalsIgnoreCase(currentUser.getEmail())) {
-                    System.out.print(MenuConst.EXIST_EMAIL);
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    public List<User> findUserByName(String name) {
-        return userService.findByName(name);
+        return userService.checkValidateExistAccount(currentUser);
     }
 
     public void synchronizedLoginUser(User loginUser) {
@@ -100,16 +85,7 @@ public class UserController {
     }
 
     public List<User> findUserWithoutMe(User loginUser, String name) {
-        List<User> userList = new LinkedList<>();
-        for (User user : findUserByName(name)) {
-            if (user.getUserId() != loginUser.getUserId()) {
-                RoleName roleName = new ArrayList<>(user.getRole()).get(0).getName();
-                if (roleName == RoleName.USER) {
-                    userList.add(user);
-                }
-            }
-        }
-        return userList;
+        return userService.findUserWithoutMe(loginUser, name);
     }
 
     public void deleteUserInfo(User user) {

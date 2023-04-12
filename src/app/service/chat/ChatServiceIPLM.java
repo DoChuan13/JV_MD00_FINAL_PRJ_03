@@ -132,4 +132,13 @@ public class ChatServiceIPLM implements IChatService, IDataBaseService<Chat> {
         }
         return ++id;
     }
+
+    public Chat findChatDetailByIdAndUser(int id, User loginUser) {
+        for (Chat chat : findAllChatByUser(loginUser)) {
+            if (chat.getChatId() == id) {
+                return chat;
+            }
+        }
+        return null;
+    }
 }

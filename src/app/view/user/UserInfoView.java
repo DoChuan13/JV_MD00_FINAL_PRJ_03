@@ -153,7 +153,7 @@ public class UserInfoView {
                     InputConfig.pressAnyKey();
                     changeUserInfo();
                 } else {
-                    System.out.println(MenuConst.UPDATE_SUCCESS);
+                    System.out.print(MenuConst.UPDATE_SUCCESS);
                     updateAllDatabase();
                     resetTempValue();
                     InputConfig.pressAnyKey();
@@ -178,7 +178,7 @@ public class UserInfoView {
         if (validEditTime <= 600000) {
             UserInfoUI.showMenuUpdateUserInfo(option, loginUser, password);
             Date nextTime = new Date(updatedEmailTime + 600000);
-            System.out.println(MenuConst.REQUIRE_NEXT_TIME + nextTime);
+            System.out.print(MenuConst.REQUIRE_NEXT_TIME + nextTime);
             InputConfig.pressAnyKey();
         } else {
             while (true) {
@@ -237,7 +237,7 @@ public class UserInfoView {
         if (validEditTime <= 600000) {
             UserInfoUI.showMenuUpdateUserInfo(option, loginUser, password);
             Date nextTime = new Date(updatedUserNameTime + 600000);
-            System.out.println(MenuConst.REQUIRE_NEXT_TIME + nextTime);
+            System.out.print(MenuConst.REQUIRE_NEXT_TIME + nextTime);
             InputConfig.pressAnyKey();
         } else {
             while (true) {

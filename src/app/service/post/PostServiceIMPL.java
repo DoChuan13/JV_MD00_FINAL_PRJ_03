@@ -19,6 +19,28 @@ public class PostServiceIMPL implements IPostService, IDataBaseService<Post> {
         postList = new IOFileConfig<Post>().readFile(DataBase.PATH_POST);
     }
 
+    private static boolean isLikedFriend(List<Like> likeList, boolean likedFriend, int friend1Id, int friend2Id) {
+        for (Like like : likeList) {
+            int likedUserId = like.getLikedUser().getUserId();
+            if (likedUserId == friend1Id || likedUserId == friend2Id) {
+                likedFriend = true;
+                break;
+            }
+        }
+        return likedFriend;
+    }
+
+    private static boolean isCommentedFriend(List<Comment> commentList, boolean commentedFriend, int friend1Id, int friend2Id) {
+        for (Comment comment : commentList) {
+            int commentedUserId = comment.getCommentUser().getUserId();
+            if (commentedUserId == friend1Id || commentedUserId == friend2Id) {
+                commentedFriend = true;
+                break;
+            }
+        }
+        return commentedFriend;
+    }
+
     @Override
     public List<Post> findAll() {
         return postList;
@@ -73,24 +95,51 @@ public class PostServiceIMPL implements IPostService, IDataBaseService<Post> {
     }
 
     @Override
-    public List<Post> getPostListForUser(User user) {
+    public List<Post> getPostListForUser(User loginUser) {
         List<Post> postResult = new LinkedList<>();
         for (Post post : postList) {
             int ownUserId = post.getOwnUser().getUserId();
-            if (ownUserId == user.getUserId()) {
+            if (ownUserId == loginUser.getUserId()) {
                 postResult.add(post);
             } else if (post.getPostStatus().equalsIgnoreCase(MenuConst.POST_PUBLIC)) {
-                postResult.add(post);
-            } else if (!post.getPostStatus().equalsIgnoreCase(MenuConst.POST_PRIVATE)) {
-                List<Friend> acceptedFriendList = friendService.getAcceptedFriendList(user);
+                List<Friend> acceptedFriendList = friendService.getAcceptedFriendList(loginUser);
+                List<Like> likeList = post.getLikeList();
+                List<Comment> commentList = post.getCommentList();
+                boolean likedFriend = false, commentedFriend = false, ownFriend = false;
                 for (Friend friend : acceptedFriendList) {
-                    int user1Id = friend.getFriend1().getUserId();
-                    int user2Id = friend.getFriend2().getUserId();
-                    if ((ownUserId == user1Id || ownUserId == user2Id) &&
+                    int friend1Id = friend.getFriend1().getUserId();
+                    int friend2Id = friend.getFriend2().getUserId();
+                    if (friend.getStatus().equalsIgnoreCase(MenuConst.FRIEND_ACCEPTED)) {
+                        //Friend own this Post
+                        if ((ownUserId == friend1Id || ownUserId == friend2Id)) {
+                            ownFriend = true;
+                            break;
+                        } else {
+                            //Friend don't own this Post
+                            //Check Friend liked this Post
+                            likedFriend = isLikedFriend(likeList, likedFriend, friend1Id, friend2Id);
+                            //Check Friend comment this Post
+                            commentedFriend = isCommentedFriend(commentList, commentedFriend, friend1Id, friend2Id);
+                        }
+                    }
+                }
+                if (ownFriend || likedFriend || commentedFriend) {
+                    postResult.add(post);
+                }
+            } else if (post.getPostStatus().equalsIgnoreCase(MenuConst.POST_FRIEND)) {
+                List<Friend> acceptedFriendList = friendService.getAcceptedFriendList(loginUser);
+                boolean ownFriend = false;
+                for (Friend friend : acceptedFriendList) {
+                    int friend1Id = friend.getFriend1().getUserId();
+                    int friend2Id = friend.getFriend2().getUserId();
+                    if ((ownUserId == friend1Id || ownUserId == friend2Id) &&
                             friend.getStatus().equalsIgnoreCase(MenuConst.FRIEND_ACCEPTED)) {
-                        postResult.add(post);
+                        ownFriend = true;
                         break;
                     }
+                }
+                if (ownFriend) {
+                    postResult.add(post);
                 }
             }
         }
@@ -175,5 +224,24 @@ public class PostServiceIMPL implements IPostService, IDataBaseService<Post> {
             }
         }
         return ++id;
+    }
+
+    public List<Post> findOwnerPostList(User ownUser) {
+        List<Post> postList = new LinkedList<>();
+        for (Post post : postList) {
+            if (post.getOwnUser().getUserId() == ownUser.getUserId()) {
+                postList.add(post);
+            }
+        }
+        return postList;
+    }
+
+    public void createNewComment(Post detailPost, Comment newComment) {
+        Post post = findById(detailPost.getPostId());
+        if (post != null) {
+            List<Comment> commentList = post.getCommentList();
+            commentList.add(newComment);
+            save(post);
+        }
     }
 }

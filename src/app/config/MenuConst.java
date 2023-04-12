@@ -86,7 +86,7 @@ public final class MenuConst {
     public static final String RESULT_NOT_FOUND = ColorConfig.ERROR_COLOR + "Result not Found!!! Press any key to try again... " + ColorConfig.RESET;
     public static final String FRIEND_EMPTY = ColorConfig.ERROR_COLOR + "Friend List Empty!!! Press any key to try again... " + ColorConfig.RESET;
     public static final String POST_EMPTY = ColorConfig.ERROR_COLOR + "Post List Empty!!! Press any key to try again... " + ColorConfig.RESET;
-    public static final String REQUIRE_NEXT_TIME = ColorConfig.ERROR_COLOR + "Can't change info this time. Please wait until: " + ColorConfig.RESET;
+    public static final String REQUIRE_NEXT_TIME = ColorConfig.ERROR_COLOR + "Can't change info at this time. Please wait until: " + ColorConfig.RESET;
     public static final String CONFIRM_DELETE_POST = ColorConfig.ERROR_COLOR + "Are you sure DELETE this post? (Y/N)....: " + ColorConfig.RESET;
     public static final String CONFIRM_ACCEPT = ColorConfig.ERROR_COLOR + "Are you sure ACCEPT Friend with this user? (Y/N)....: " + ColorConfig.RESET;
     public static final String CONFIRM_REJECT = ColorConfig.ERROR_COLOR + "Are you sure REJECT Friend with this user? (Y/N)....: " + ColorConfig.RESET;

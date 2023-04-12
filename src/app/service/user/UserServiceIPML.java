@@ -2,10 +2,12 @@ package app.service.user;
 
 import app.config.IOFileConfig;
 import app.config.MenuConst;
+import app.model.RoleName;
 import app.model.User;
 import app.service.generic.IDataBaseService;
 import init.DataBase;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -130,6 +132,35 @@ public class UserServiceIPML implements IUserService, IDataBaseService<User> {
             }
         }
         return ++id;
+    }
+
+    public boolean checkValidateExistAccount(User currentUser) {
+        for (User user : userList) {
+            if (user.getUserId() != currentUser.getUserId()) {
+                if (user.getUserName().equalsIgnoreCase(currentUser.getUserName())) {
+                    System.out.print(MenuConst.EXIST_USER_ACCOUNT);
+                    return true;
+                }
+                if (user.getEmail().equalsIgnoreCase(currentUser.getEmail())) {
+                    System.out.print(MenuConst.EXIST_EMAIL);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public List<User> findUserWithoutMe(User loginUser, String name) {
+        List<User> userList = new LinkedList<>();
+        for (User user : findByName(name)) {
+            if (user.getUserId() != loginUser.getUserId()) {
+                RoleName roleName = new ArrayList<>(user.getRole()).get(0).getName();
+                if (roleName == RoleName.USER) {
+                    userList.add(user);
+                }
+            }
+        }
+        return userList;
     }
 
     @Override

@@ -72,7 +72,7 @@ public class FriendServiceIPLM implements IFriendService, IDataBaseService<Frien
     public void deleteFriendByAdmin(User user) {
         for (Friend friend : friendList) {
             if (friend.getFriend1().getUserId() == user.getUserId() || friend.getFriend2().getUserId() == user.getUserId()) {
-                boolean result = friendList.remove(friend);
+                friendList.remove(friend);
                 updateDatabase(DataBase.PATH_FRIEND, friendList);
                 return;
             }
@@ -141,5 +141,44 @@ public class FriendServiceIPLM implements IFriendService, IDataBaseService<Frien
             }
         }
         return ++id;
+    }
+
+    public List<Friend> getListAllFriend(User user) {
+        List<Friend> friendList = new LinkedList<>();
+        for (Friend friend : findAll()) {
+            User friend1 = friend.getFriend1();
+            User friend2 = friend.getFriend2();
+            if (friend1.getUserId() == user.getUserId() || friend2.getUserId() == user.getUserId()) {
+                friendList.add(friend);
+            }
+        }
+        return friendList;
+    }
+
+    public Friend getSentRequestByIdAndUser(int id, User loginUser) {
+        for (Friend friend : getSentRequestList(loginUser)) {
+            if (friend.getFriendId() == id) {
+                return friend;
+            }
+        }
+        return null;
+    }
+
+    public Friend getPendingFriendByID(int id, User loginUser) {
+        for (Friend friend : getPendingFriendList(loginUser)) {
+            if (friend.getFriendId() == id) {
+                return friend;
+            }
+        }
+        return null;
+    }
+
+    public Friend getAcceptedFriendById(int id, User loginUser) {
+        for (Friend friend : getAcceptedFriendList(loginUser)) {
+            if (friend.getFriendId() == id) {
+                return friend;
+            }
+        }
+        return null;
     }
 }

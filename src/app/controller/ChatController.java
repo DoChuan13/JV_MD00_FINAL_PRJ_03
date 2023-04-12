@@ -3,12 +3,11 @@ package app.controller;
 import app.model.Chat;
 import app.model.User;
 import app.service.chat.ChatServiceIPLM;
-import app.service.chat.IChatService;
 
 import java.util.List;
 
 public class ChatController {
-    private final IChatService chatService = new ChatServiceIPLM();
+    private final ChatServiceIPLM chatService = new ChatServiceIPLM();
 
     public List<Chat> getAllChatList() {
         return chatService.findAll();
@@ -44,12 +43,7 @@ public class ChatController {
     }
 
     public Chat findChatDetailByIDAndUser(int id, User loginUser) {
-        for (Chat chat : findAllChatByUser(loginUser)) {
-            if (chat.getChatId() == id) {
-                return chat;
-            }
-        }
-        return null;
+        return chatService.findChatDetailByIdAndUser(id, loginUser);
     }
 
     public void removeChatByChatUser(Chat startChat) {
