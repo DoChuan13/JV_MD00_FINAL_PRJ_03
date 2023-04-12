@@ -18,7 +18,6 @@ public class PostView {
     private static final PostController postController = new PostController();
     private static final UserController userController = new UserController();
     private final User loginUser = userController.getLoginUser();
-    private List<Post> postList = postController.getPostList();
     private String postContent = "", postStatus = "";
     private String comment = "";
 
@@ -133,7 +132,7 @@ public class PostView {
 
     private void directToPostDetail(int option, List<Post> ownerPostList) {
         PostUI.showMenuUserPostPage(option, ownerPostList);
-        if (postList.size() == 0) {
+        if (ownerPostList.size() == 0) {
             System.out.print(MenuConst.POST_EMPTY);
             InputConfig.pressAnyKey();
             showAllPost();
@@ -445,7 +444,6 @@ public class PostView {
     /*========================================View Post Page End========================================*/
     /*========================================Others========================================*/
     private void resetTempValue() {
-        postList = postController.getPostList();
         postContent = postStatus = comment = "";
     }
 
