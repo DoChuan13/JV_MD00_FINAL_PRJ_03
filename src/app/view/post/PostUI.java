@@ -42,7 +42,7 @@ public final class PostUI {
         BreakConfig.clearScreen();
         System.out.println(MenuConst.HEADER_ALL_POST);
         if (postList.size() == 0) {
-            System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  => " + MenuConst.WIDTH_NO_CONTENT + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, MenuConst.HAVE_NO_POST_HOME);
+            System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  => " + MenuConst.WIDTH_NO_CONTENT + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, MenuConst.HAVE_NO_POST);
         } else {
             for (Post post : postList) {
                 showPostInfo(post);
