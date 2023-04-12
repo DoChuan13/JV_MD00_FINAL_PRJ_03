@@ -331,7 +331,7 @@ public class HomeView {
     /*========================================View Home Page End========================================*/
     private void resetTempValue() {
         loginUser = userController.getLoginUser();
-        postList = postController.getPostList();
+        postList = postController.getPostListForUser(loginUser);
         comment = "";
     }
 }

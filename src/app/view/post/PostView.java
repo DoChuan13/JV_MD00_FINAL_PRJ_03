@@ -106,13 +106,13 @@ public class PostView {
 
     private void showAllPost() {
         int option = 0;
-        List<Post> postUserList = postController.findOwnerPostList(loginUser);
-        PostUI.showMenuUserPostPage(option, postUserList);
+        List<Post> ownerPostList = postController.findOwnerPostList(loginUser);
+        PostUI.showMenuUserPostPage(option, ownerPostList);
         System.out.print(MenuConst.SELECT_OPTION);
         option = InputConfig.getInteger();
         switch (option) {
             case 8:
-                directToPostDetail(option, postUserList);
+                directToPostDetail(option, ownerPostList);
                 break;
             case 9:
                 resetTempValue();
@@ -124,15 +124,15 @@ public class PostView {
             case 0:
                 MainView.exitApplication();
             default:
-                PostUI.showMenuUserPostPage(option, postUserList);
+                PostUI.showMenuUserPostPage(option, ownerPostList);
                 MainView.showInvalidOption();
                 InputConfig.pressAnyKey();
                 showAllPost();
         }
     }
 
-    private void directToPostDetail(int option, List<Post> postUserList) {
-        PostUI.showMenuUserPostPage(option, postUserList);
+    private void directToPostDetail(int option, List<Post> ownerPostList) {
+        PostUI.showMenuUserPostPage(option, ownerPostList);
         if (postList.size() == 0) {
             System.out.print(MenuConst.POST_EMPTY);
             InputConfig.pressAnyKey();
