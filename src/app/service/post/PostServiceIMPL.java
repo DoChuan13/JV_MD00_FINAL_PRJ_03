@@ -227,13 +227,13 @@ public class PostServiceIMPL implements IPostService, IDataBaseService<Post> {
     }
 
     public List<Post> findOwnerPostList(User ownUser) {
-        List<Post> postList = new LinkedList<>();
+        List<Post> ownerPost = new LinkedList<>();
         for (Post post : postList) {
             if (post.getOwnUser().getUserId() == ownUser.getUserId()) {
-                postList.add(post);
+                ownerPost.add(post);
             }
         }
-        return postList;
+        return ownerPost;
     }
 
     public void createNewComment(Post detailPost, Comment newComment) {

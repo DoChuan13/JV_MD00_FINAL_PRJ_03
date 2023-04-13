@@ -191,13 +191,6 @@ public class ChatView {
 
     private void sentChat(int option, Chat startChat, User loginUser) {
         List<ChatDetail> chatDetailList = startChat.getChatContent();
-        if (startChat.getStartUser().getUserId() == loginUser.getUserId() &&
-                startChat.getTargetIn() == null) {
-            startChat.setTargetIn(new Date());
-        } else if (startChat.getTargetUser().getUserId() == loginUser.getUserId() &&
-                startChat.getStartIn() == null) {
-            startChat.setStartIn(new Date());
-        }
         chatDetailList.add(chatSession);
         chatController.sentNewChat(startChat);
         resetTempValue();
@@ -211,6 +204,13 @@ public class ChatView {
         ChatUI.showMenuChatDetail(option, startChat, chatSession, loginUser);
         System.out.print(MenuConst.INPUT_CHAT);
         chatContent = InputConfig.getString();
+        if (startChat.getStartUser().getUserId() == loginUser.getUserId() &&
+                startChat.getTargetIn() == null) {
+            startChat.setTargetIn(new Date());
+        } else if (startChat.getTargetUser().getUserId() == loginUser.getUserId() &&
+                startChat.getStartIn() == null) {
+            startChat.setStartIn(new Date());
+        }
         int chatDetailId = chatController.generateChatDetailId(startChat);
         chatSession = new ChatDetail(chatDetailId, chatContent, loginUser);
         sentChatDetail(startChat);
