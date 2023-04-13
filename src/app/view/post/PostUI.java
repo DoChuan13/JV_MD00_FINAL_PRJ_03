@@ -192,17 +192,17 @@ public final class PostUI {
         BreakConfig.clearScreen();
         System.out.println(MenuConst.HEADER_VIEW_LIKE_POST);
 
-        String commentUserTitle = "User: ";
+        String likedUserTitle = "User: ";
         String userStatusTitle = "Status: ";
         String userIdTitle = "User Id: ";
-        System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  => " + MenuConst.WIDTH_3_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, commentUserTitle, userStatusTitle, userIdTitle);
+        System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  => " + MenuConst.WIDTH_3_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, likedUserTitle, userStatusTitle, userIdTitle);
         if (post.getCommentList().size() == 0) {
             System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "  => " + MenuConst.WIDTH_NO_CONTENT + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, MenuConst.HAVE_NO_LIKE_IN_POST);
             System.out.println(MenuConst.BLANK_LINE);
         } else {
-            for (Comment comment : post.getCommentList()) {
-                User commentUser = new UserController().findUserById(comment.getCommentUser().getUserId());
-                showAllLiked(comment, commentUser);
+            for (Like like : post.getLikeList()) {
+                User likedUser = new UserController().findUserById(like.getLikedUser().getUserId());
+                showAllLiked(like, likedUser);
             }
             System.out.println(MenuConst.BLANK_LINE);
         }
@@ -211,10 +211,10 @@ public final class PostUI {
         System.out.println(MenuConst.FOOTER);
     }
 
-    public static void showAllLiked(Comment comment, User commentUser) {
-        String commentUserView = comment.getCommentUser().getName();
-        String userStatusView = ((commentUser == null) ? "Unavailable" : (commentUser.getCreatedTime() != comment.getCommentUser().getCreatedTime() ? "Unavailable" : "Active"));
-        String userIdView = String.valueOf((commentUser == null) ? "Unknown" : (commentUser.getCreatedTime() != (comment.getCommentUser().getCreatedTime()) ? "Unknown" : comment.getCommentUser().getUserId()));
-        System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "     " + MenuConst.WIDTH_3_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, commentUserView, userStatusView, userIdView);
+    public static void showAllLiked(Like like, User likedUser) {
+        String likedUserView = like.getLikedUser().getName();
+        String userStatusView = ((likedUser == null) ? "Unavailable" : (likedUser.getCreatedTime() != like.getLikedUser().getCreatedTime() ? "Unavailable" : "Active"));
+        String userIdView = String.valueOf((likedUser == null) ? "Unknown" : (likedUser.getCreatedTime() != (like.getLikedUser().getCreatedTime()) ? "Unknown" : like.getLikedUser().getUserId()));
+        System.out.printf(ColorConfig.BORDER_COLOR + "|" + ColorConfig.BORDER_COLOR + "     " + MenuConst.WIDTH_3_COL + ColorConfig.BORDER_COLOR + "|\n" + ColorConfig.RESET, likedUserView, userStatusView, userIdView);
     }
 }
