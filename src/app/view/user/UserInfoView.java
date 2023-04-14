@@ -337,21 +337,24 @@ public class UserInfoView {
     }
 
     private void inputCurrentPassword(int option) {
-        while (true) {
-            UserInfoUI.showMenuUpdatePassword(option, password, newPassword, rePassword);
-            System.out.println(MenuConst.REQUIRE_PASSWORD);
-            System.out.print(MenuConst.INPUT_PASSWORD);
-            String input = InputConfig.getString();
-            boolean validatePassword = ValidateConfig.validatePassword(input);
-            if (validatePassword) {
-                password = input;
-                break;
-            } else {
-                UserInfoUI.showMenuUpdatePassword(option, password, newPassword, rePassword);
-                System.out.print(MenuConst.INVALID_PASSWORD);
-                InputConfig.pressAnyKey();
-            }
-        }
+        /*while (true) {
+        *   UserInfoUI.showMenuUpdatePassword(option, password, newPassword, rePassword);
+        *   System.out.println(MenuConst.REQUIRE_PASSWORD);
+        *   System.out.print(MenuConst.INPUT_PASSWORD);
+        *   String input = InputConfig.getString();
+        *   boolean validatePassword = ValidateConfig.validatePassword(input);
+        *   if (validatePassword) {
+        *       password = input;
+        *       break;
+        *   } else {
+        *       UserInfoUI.showMenuUpdatePassword(option, password, newPassword, rePassword);
+        *       System.out.print(MenuConst.INVALID_PASSWORD);
+        *       InputConfig.pressAnyKey();
+        *   }
+        }*/
+        UserInfoUI.showMenuUpdatePassword(option, password, newPassword, rePassword);
+        System.out.print(MenuConst.INPUT_PASSWORD);
+        password = InputConfig.getString();
         changePasswordInfo();
     }
 
