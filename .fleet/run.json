@@ -1,0 +1,10 @@
+{
+    "configurations": [
+        {
+            "type": "jps-run",
+            "name": "Jps-run configuration",
+            "mainClass": "Main.java",
+            "module": ""
+        }
+    ]
+}
